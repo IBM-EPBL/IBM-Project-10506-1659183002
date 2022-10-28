@@ -100,7 +100,7 @@ def send_confirmation_token(email):
     token = generate_confirmation_token(email)    
     mail = get_mail()
 
-    confirm_url =f"http://localhost:5500/ibm/IBM-Project-10506-1659183002/development_phase/frontend/confirm.html?token={token}"
+    confirm_url =f"{getenv('BASE_URL')}/confirm.html?token={token}"
     confirm_html = f"<p>Welcome! Thanks for signing up. Please follow this link to activate your account:</p><p><a href={confirm_url}>{confirm_url}</a></p><br><h4>Happy Spending</h4>"
 
     msg = Message(subject="Confirm E-Mail from Spency", sender=getenv("MAIL_USERNAME"), recipients=[email], html=confirm_html)
