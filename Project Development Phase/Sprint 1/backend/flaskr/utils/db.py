@@ -1,3 +1,4 @@
+from pickle import NONE
 import ibm_db
 from dotenv import load_dotenv
 from ..config.db_config import get_db_credential
