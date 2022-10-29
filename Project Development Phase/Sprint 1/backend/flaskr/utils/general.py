@@ -96,13 +96,20 @@ def confirm_token(token, expiration=900):
         return False
     return email
 
+import sendgrid
+from sendgrid.helpers.mail import *
 def send_confirmation_token(email):
     token = generate_confirmation_token(email)    
-    mail = get_mail()
-
+    
     confirm_url =f"{getenv('BASE_URL')}/confirm.html?token={token}"
     confirm_html = f"<p>Welcome! Thanks for signing up. Please follow this link to activate your account:</p><p><a href={confirm_url}>{confirm_url}</a></p><br><h4>Happy Spending</h4>"
 
-    msg = Message(subject="Confirm E-Mail from Spency", sender=getenv("MAIL_USERNAME"), recipients=[email], html=confirm_html)
-    mail.send(msg)
+    sg = sendgrid.SendGridAPIClient(api_key=getenv('SENDGRID_API_KEY'))
+    from_email = Email("7179KCTKCTKCTKCTKCTKCT19BIT011@smartinternz.com")
+    to_email = To(email)
+    subject = "Confirm E-Mail from Spency"
+    content = Content("text/html", confirm_html)
+    mail = Mail(from_email, to_email, subject, content)
+    sg.client.mail.send.post(request_body=mail.get())
+
     return True
