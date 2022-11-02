@@ -19,3 +19,240 @@ header nav .user .user-logout{
     border-radius: 1rem;
     cursor: pointer;
 }
+
+main{
+    margin: 1rem;
+}
+
+.income-cnt{
+    width: var(--box-width);
+    background-color: var(--box-bg);
+    font-size: var(--font-clamp);
+    padding: 1rem;
+}
+
+.income-cnt form{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input{
+    font-size: var(--inp-font-clamp);
+    background-color: transparent;
+    color: var(--secondary);
+    border: 0;
+    border-bottom: 2px solid;
+    padding: .2rem;
+    outline: none;
+    height: clamp(20px, 10vw, 50px);
+    width: 80%;
+}
+
+/* .income-cnt input{
+    font-size: var(--inp-font-clamp);
+    background-color: transparent;
+    color: var(--secondary);
+    border: 0;
+    border-bottom: 2px solid;
+    padding: .2rem;
+    outline: none;
+    height: 50px;
+} */
+
+.income-cnt form .income{
+    display: flex;
+    flex-direction: column;
+}
+
+.income-cnt form .income .income-inp{
+    display: flex;
+    align-items: center;
+}
+
+.income-cnt form .income .income-inp .budget-logo{
+    height: clamp(20px, 10vw, 50px);    
+    padding: .2rem;
+    border-bottom: 2px solid var(--secondary);
+}
+
+.income-cnt form .income .income-inp .budget-logo img{
+    height: 90%;
+}
+
+.income-cnt form .edit-logo{
+    cursor: pointer;
+    padding: .2rem;
+    height: clamp(20px, 10vw, 60px);
+    align-self: flex-end;
+
+}
+
+.income-cnt form .edit-logo img{
+    height: 100%;
+}
+
+.income-cnt .balance-cnt{
+    width: fit-content;
+    margin: 1rem auto .5rem auto;
+}
+
+.income-cnt .balance-cnt .balance{
+    color: var(--accent);
+    padding: 1rem;
+    background-color: var(--primary);
+    border-radius: .6rem;
+    border: 2px solid var(--secondary-transparent);
+}
+
+.income-cnt .balance-cnt .balance span.high{
+    color: var(--positive)
+}
+.income-cnt .balance-cnt .balance span.mid{
+    color: var(--accent)
+}
+.income-cnt .balance-cnt .balance span.low{
+    color: var(--negative)
+}
+
+.expense{
+    font-size: var(--font-clamp);
+    width: var(--box-width);
+    height: calc(100vh - 400px);
+    margin: 2rem 0;
+    background-color: var(--box-bg);
+    overflow: auto;
+}
+
+.expense .expense-header{
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--accent);
+}
+
+.expense .expense-header h3{
+    width: 50%;
+    text-align: center;
+    padding: .5rem 0;
+    cursor: pointer;
+}
+
+.expense .expense-header h3:hover{
+    background-color: var(--primary);
+}
+
+.expense .expense-header h3.active{
+    background-color: var(--secondary-transparent);
+    color: var(--primary);
+}
+
+.expense .expense-header h3:first-child{
+    border-right: 1px solid var(--accent);
+}
+.expense .expense-header h3:last-child{
+    border-left: 1px solid var(--accent);
+}
+
+.expense-add {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.expense-add .expense-amount{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+}
+
+.expense-add .expense-amount input{
+    width: 100%;
+}
+
+.expense-add .expense-type{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.expense-add .expense-type div{
+    display: flex;
+    align-items: center;
+    padding: .3rem 1.5rem;
+    margin: 1rem .5rem;
+    cursor: pointer;
+    border: 5px solid transparent;
+    border-radius: .5rem;
+}
+
+.expense-add .expense-type div:hover{
+    background-color: var(--accent);
+}
+
+.expense-add .expense-type div.active{
+    color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.expense-add .expense-type .type-income{
+    background-color: var(--positive);
+    color: var(--primary);
+}
+.expense-add .expense-type .type-expense{
+    background-color: var(--negative);
+}
+
+.expense-label{
+    margin: 2rem 0;
+}
+
+.expense-label #amount-label{
+    font-size: var(--inp-font-clamp);
+    background-color: transparent;
+    color: var(--accent);
+    outline: none;
+    border: none;
+    border-bottom: 2px solid var(--secondary);
+}
+
+.expense-add .label-suggestion{
+    width: 90%;
+    border-top: 1px solid var(--secondary-transparent);
+    padding: 1rem .5rem;
+}
+
+.expense-add .label-suggestion{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.expense-add .label-suggestion div{
+    padding: .5rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.expense-add .label-suggestion div:hover{
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.expense-add .label-suggestion div.active{
+    background-color: var(--secondary-transparent);
+    color: var(--primary);
+}

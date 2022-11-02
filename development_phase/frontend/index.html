@@ -19,7 +19,67 @@
             </div>
         </nav>
     </header>
-
+    <main>
+        <div class="col-1">
+            <div class="income-cnt">
+                <form action="">
+                    <div class="income">
+                        <label for="income">Total Budget:</label>
+                        <div class="income-inp">
+                            <input type="number" name="income" id="income" value="0" readonly>
+                            <div class="budget-logo">
+                                <img src="./assets/budget.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="edit-logo">
+                        <img src="./assets/edit.svg" alt="">
+                    </div>
+                </form>
+                <div class="balance-cnt">
+                    <div class="balance">Balance: <span class="high">1000</span></div>
+                </div>
+            </div>
+            <div class="expense">
+                <div class="expense-header">
+                    <h3 class="active btn-login">Add Expense</h3>
+                    <h3 class="btn-signup">Split Income</h3>
+                </div>
+                <div class="expense-add">
+                    <form action="">
+                        <div class="expense-amount">
+                            <label for="amount-inp">Enter Amount:</label>
+                            <input type="number" placeholder="0" id="amount-inp">
+                        </div>
+                        <div class="expense-type">
+                            <div class="type-income"><span>Income</span>&nbsp;<img src="./assets/add.svg" alt="Add Income"></div>
+                            <div class="type-expense active"><span>Expense</span>&nbsp;<img src="./assets/minus.svg" alt="Add Expense"></div>
+                        </div>
+                        <div class="expense-label">
+                            <label for="amount-label">Category:</label>
+                            <select name="label" id="amount-label">
+                                <option value="Food-Drinks">Food & Drinks</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Vehicle">Vehicle</option>
+                                <option value="Trip">Trip</option>
+                                <option value="General-Expense">General Expense</option>
+                                <option value="Financial-Exense">Financial Exense</option>
+                                <option value="Income">Income</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="label-suggestion">
+                        <div class="label-value active" data-value="Food-Drinks">Food & Drinks</div>
+                        <div class="label-value" data-value="Entertainment">Entertainment</div>
+                        <div class="label-value" data-value="Shopping">Shopping</div>
+                        <div class="label-value" data-value="Trip">Trip</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     <script src="./js/index.js"></script>
 </body>
 </html>
