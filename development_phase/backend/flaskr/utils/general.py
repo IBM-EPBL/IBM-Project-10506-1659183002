@@ -91,9 +91,9 @@ def confirm_token(token, expiration=900):
             salt=getenv('PASSWORD_SALT'),
             max_age=expiration
         )
+        return email
     except:
         return False
-    return email
 
 from .mail import send_mail
 def send_confirmation_token(email):

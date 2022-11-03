@@ -11,6 +11,7 @@ def get_db_credential():
     db_db = getenv("DB_DB")
     db_port = getenv("DB_PORT")
     db_protocol = getenv("DB_PROTOCOL")
+    db_cert_path = getenv("DB_CERT_PATH")
 
     db_crediential = (
         "DATABASE={0};"
@@ -19,7 +20,8 @@ def get_db_credential():
         "PROTOCOL={3};"
         "UID={4};"
         "PWD={5};"
-        "SECURITY=SSL"
-    ).format(db_db, db_hostname, db_port, db_protocol, db_uid, db_pwd)
+        "SECURITY=SSL;"
+        "SSLServerCertificate={6}"
+    ).format(db_db, db_hostname, db_port, db_protocol, db_uid, db_pwd, db_cert_path)
 
     return db_crediential
