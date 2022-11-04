@@ -75,7 +75,7 @@ const enable_next_resend = (next_resend_ts) => {
     msg.innerText = `Wait: ${seconds--}`
     isResendBtnEnabled = false;
     intervalUid = setInterval(() => {
-        if(seconds === 0){
+        if(seconds <= 0){
             btn.disabled = false;
             isResendBtnEnabled = true;
             clearInterval(intervalUid);
@@ -127,7 +127,7 @@ signupForm.addEventListener("submit", async (e) => {
     else{
         const msgElem = document.querySelector(".msg");
         showMessage(msgElem, "Successfully Registered Please verify the Email and Login");
-        setTimeout(showMessage.bind(null, msgElem, ''), 4000)
+        setTimeout(showMessage.bind(null, msgElem, ''), 5000)
         loginBtn.click();
     }
     toggleLoader(0, signupSubmit, authLoader[1]);
@@ -135,7 +135,7 @@ signupForm.addEventListener("submit", async (e) => {
 
 const showMessage = (elem, msg) => {
     elem.innerText = msg;
-    setTimeout(() => elem.innerText = "", 2000);
+    setTimeout(() => elem.innerText = "", 4000);
 }
 
 const toggleLoader = (toEnable, submitBtn, loader) => {

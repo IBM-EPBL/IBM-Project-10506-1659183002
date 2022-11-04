@@ -140,6 +140,7 @@ input{
     width: 100%;
     margin-bottom: 1rem;
     border-bottom: 2px solid var(--accent);
+    font-size: 1.3rem;
 }
 
 .expense .expense-header h3{
@@ -165,7 +166,7 @@ input{
     border-left: 1px solid var(--accent);
 }
 
-.expense-add {
+.expense-add, .split-income {
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -219,7 +220,7 @@ input{
     margin: 2rem 0;
 }
 
-.expense-label #amount-label{
+.expense-label #amount-label, #split-label{
     font-size: var(--inp-font-clamp);
     background-color: transparent;
     color: var(--accent);
@@ -255,4 +256,92 @@ input{
 .expense-add .label-suggestion div.active{
     background-color: var(--secondary-transparent);
     color: var(--primary);
+}
+
+.expense .split-income{
+    padding: 0 1rem 1rem 1rem;
+}
+
+.expense .split-income form > div{
+    margin: 1.5rem 0;
+}
+
+.expense .split-income form div{
+    display: flex;
+    align-items: center;
+}
+
+.expense .split-income form input.radio{
+    margin: 0 1rem;
+    height: unset;
+}
+
+.expense .split-data-cnt{
+    padding: .5rem;
+    width: 100%;
+    border-top: 1px solid var(--secondary-transparent);
+}
+
+.split-preview span{
+    color: var(--accent);
+}
+
+.split-data-cnt h5{
+    margin: 0 0 1rem 0;
+}
+
+.split-values{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: .5rem 0;
+}
+
+.split-value{
+    font-size: 1.4rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    position: relative;
+    overflow: hidden;
+}
+
+.split-value:first-child{
+    border-bottom: .5px solid var(--secondary-transparent);
+}
+
+.split-value:not(:first-child){
+    background-color: var(--primary);
+    padding: .2rem;
+}
+
+.no-overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.split-value .split-edit{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: none;
+}
+
+.split-value:hover .split-edit{
+    display: flex;
+}
+
+.split-edit div{
+    background-color: var(--primary);
+    cursor: pointer;
+}
+
+.split-value .split-edit .split-edit-ic img{
+    width: 30px;
+    height: 30px;
+}
+.split-value .split-edit .split-delete-ic img{
+    width: 40px;
+    height: 40px;
 }

@@ -1,3 +1,19 @@
+// Toggle different views - expense, split, alert
+const headerToggler = document.querySelectorAll(".header-btn");
+let activeHeader = document.querySelector(".expense-add");
+
+headerToggler.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        document.querySelector(".expense-header .active").classList.remove("active");
+        e.target.classList.add("active");
+        activeHeader.classList.add("none");
+        const toActivate = document.querySelector(`.${e.target.dataset["class"]}`);
+        toActivate.classList.remove("none");
+        activeHeader = toActivate;
+    })
+})
+
+
 const baseURL = "http://localhost:5000"
 
 const endpoint = {

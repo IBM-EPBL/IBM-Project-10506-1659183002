@@ -42,8 +42,9 @@
             </div>
             <div class="expense">
                 <div class="expense-header">
-                    <h3 class="active btn-login">Add Expense</h3>
-                    <h3 class="btn-signup">Split Income</h3>
+                    <h3 class="active header-btn btn-expense" data-class="expense-add">Add Expense</h3>
+                    <h3 class="header-btn btn-income" data-class="split-income">Split Income</h3>
+                    <h3 class="header-btn btn-alert" data-class="set-alert">Set Alert</h3>
                 </div>
                 <div class="expense-add">
                     <form action="">
@@ -77,6 +78,144 @@
                         <div class="label-value" data-value="Trip">Trip</div>
                     </div>
                 </div>
+                <div class="split-income none">
+                    <form action="">
+                        <div class="split-type">
+                            <div for="split-by">Split By:</div>
+                            <div>
+                                <input type="radio" id="split-percent" name="split-type" class="radio">
+                                <label for="split-percent">Percentage</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="split-amount-inp" name="split-type" class="radio" checked>
+                                <label for="split-amount-inp">Amount</label>
+                            </div>
+                        </div>
+                        <div class="split-value-inp">
+                            <label for="split-inp">Enter Value:</label>
+                            <input type="number" placeholder="0" id="split-inp">
+                        </div>
+                        <div class="split-preview">Split Value:&nbsp;<span>Rs 200.00</span></div>
+                        <div class="expense-label">
+                            <label for="split-label">Category:</label>
+                            <select name="label" id="split-label">
+                                <option value="Food-Drinks">Food & Drinks</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Vehicle">Vehicle</option>
+                                <option value="Trip">Trip</option>
+                                <option value="General-Expense">General Expense</option>
+                                <option value="Financial-Exense">Financial Exense</option>
+                                <option value="Income">Income</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="split-data-cnt">
+                        <h5>Split Data</h5>
+                        <div class="split-values">
+                            <div class="split-value">
+                                <div class="split-label">Label</div>
+                                <div class="split-from">From</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-amount">Balance</div>
+                                <div class="split-alert">Alert</div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label no-overflow">Food & Drinkssfsdf</div>
+                                <div class="split-from no-overflow">10/10/10</div>
+                                <div class="split-amount no-overflow">800.00</div>
+                                <div class="split-balance no-overflow">400.00</div>
+                                <div class="split-alert no-overflow">2040.00</div>
+                                <div class="split-edit">
+                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label">Label</div>
+                                <div class="split-from">From</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-alert">Alert</div>
+                                <div class="split-edit">
+                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label">Label</div>
+                                <div class="split-from">From</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-alert">Alert</div>
+                                <div class="split-edit">
+                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label">Label</div>
+                                <div class="split-from">From</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-alert">Alert</div>
+                                <div class="split-edit">
+                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label">Label</div>
+                                <div class="split-from">From</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-alert">Alert</div>
+                                <div class="split-edit">
+                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label">Label</div>
+                                <div class="split-from">From</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-alert">Alert</div>
+                                <div class="split-edit">
+                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label">Label</div>
+                                <div class="split-from">From</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-alert">Alert</div>
+                                <div class="split-edit">
+                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label">Label</div>
+                                <div class="split-from">From</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-alert">Alert</div>
+                                <div class="split-edit">
+                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label">Label</div>
+                                <div class="split-from">From</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-alert">Alert</div>
+                                <div class="split-edit">
+                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="set-alert none"></div>
             </div>
         </div>
     </main>

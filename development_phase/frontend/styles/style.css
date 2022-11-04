@@ -13,8 +13,8 @@
     --negative: #FF0000;
     --box-bg: #1D1D1D;
     --box-width: clamp(300px, 70vw, 700px);
-    --font-clamp: clamp(1rem, 4vw, 1.8rem);
-    --inp-font-clamp: clamp(.8rem, 4vw, 1.6rem);
+    --font-clamp: clamp(1rem, 4vw, 1.5rem);
+    --inp-font-clamp: clamp(.8rem, 4vw, 1.3rem);
 }
 
 a{
