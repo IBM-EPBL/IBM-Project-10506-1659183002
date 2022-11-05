@@ -41,8 +41,14 @@ def validate_add_income(user_data):
     
     return False
  
-def validate_split_income(user_data):
-    if(user_data["amount"] == "" and user_data["label"] == ""):
+def validate_split_income(user_data, type):
+    if((type == "insert" and user_data["amount"] == "" and user_data["label"] == "") or (type == "update" and user_data["amount"] == "")):
+        return { "error": ({'message': 'Please fill the Required data'}, 400) }
+    
+    return False
+
+def validate_add_expense(user_data):
+    if(user_data["amount"] == "" and user_data["type"] == "" and user_data["category"] == ""):
         return { "error": ({'message': 'Please fill the Required data'}, 400) }
     
     return False

@@ -35,3 +35,13 @@ def run_sql_update(query, params):
 
     except:
         return False
+
+def run_sql_delete(query, params):
+    try:
+        stmt=ibm_db.prepare(conn, query)
+        ibm_db.execute(stmt, params)
+        print('true')
+        return True
+
+    except:
+        return False

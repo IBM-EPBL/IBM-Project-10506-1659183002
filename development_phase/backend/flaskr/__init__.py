@@ -20,7 +20,7 @@ def create_app(test_config=None):
     # Endpoint: Income
     from .controllers.income import Income, SplitIncome
     api.add_resource(Income, '/api/income')
-    api.add_resource(SplitIncome, '/api/income/split')
+    api.add_resource(SplitIncome, '/api/income/split', '/api/income/split/<int:id>')
 
     @app.route('/hello')
     def hello():
