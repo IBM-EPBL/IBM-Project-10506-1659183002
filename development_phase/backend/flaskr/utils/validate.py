@@ -26,6 +26,7 @@ def validate_login(user_data):
     if(not (get_user)):
         return { "error": ({'message': 'User Does not Exist'}, 404) }
     
+    get_user = get_user[0]
     if(not (general.compare_hash(user_data["password"], get_user["PASSWORD_HASH"]))):
         return { "error": ({"message": "Username or Password Incorrect"}, 404) }
     print(get_user)

@@ -6,11 +6,6 @@ from ..utils.general import token_required
 
 class Income(Resource):
     @token_required
-    def get(payload, self):
-        sql_query = "UPDATE user SET total_amount=?, timestamp=? WHERE id=?"
-        params = (user_data["amount"], user_data["timestamp"], payload["id"])
-
-    @token_required
     def post(payload, self):
         user_data = request.json
         validate_result = validate.validate_add_income(user_data=user_data)

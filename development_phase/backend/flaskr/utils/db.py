@@ -8,10 +8,13 @@ def run_sql_select(query,params=None):
         stmt=ibm_db.prepare(conn,query)
         if(params==None):
             ibm_db.execute(stmt)
-            data=ibm_db.fetch_assoc(stmt)
-            return data
-        ibm_db.execute(stmt,params)
-        data=ibm_db.fetch_assoc(stmt)
+        else:
+            ibm_db.execute(stmt,params)
+        row = ibm_db.fetch_assoc(stmt)
+        data = []
+        while(row):
+            data.append(row)
+            row = ibm_db.fetch_assoc(stmt)
         return data
     except: 
         return False

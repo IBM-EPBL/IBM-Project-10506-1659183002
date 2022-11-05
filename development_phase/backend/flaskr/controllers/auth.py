@@ -24,9 +24,9 @@ class EmailVerification(Resource):
     def get(post):
         email = request.args.get('email')
         user = db.run_sql_select("SELECT EMAIL, VERIFIED, NEXT_RESEND FROM USER WHERE EMAIL = ?", (email,))
-        print(user)
-        if(user["NEXT_RESEND"] > int(datetime.now().timestamp() * 1000)):
-            return {"message": "Please wait", "next_resend": user["NEXT_RESEND"]}, 400
+        print(user[0])
+        if(user[0]["NEXT_RESEND"] > int(datetime.now().timestamp() * 1000)):
+            return {"message": "Please wait", "next_resend": user[0]["NEXT_RESEND"]}, 400
 
         sql_query = "UPDATE user SET next_resend=? WHERE email=?";
         next_time = general.generate_timestamp(2, False)
@@ -45,7 +45,7 @@ class EmailVerification(Resource):
         user = db.run_sql_select("SELECT ID, EMAIL, VERIFIED FROM USER WHERE EMAIL = ?", (email,))
         if(not user):
             return {"message": "No user exist with the mail ID"}, 404
-        if(user["VERIFIED"]):
+        if(user[0]["VERIFIED"]):
             return {"message": "Already Verirfied"}, 400
 
         sql_query = "UPDATE user SET verified=? WHERE email=?";
@@ -53,7 +53,7 @@ class EmailVerification(Resource):
         db.run_sql_update(sql_query, params=params)
 
         jwt_data = {
-            "id": user["ID"],
+            "id": user[0]["ID"],
             "email": email,
             "timestamp": 0
         }
