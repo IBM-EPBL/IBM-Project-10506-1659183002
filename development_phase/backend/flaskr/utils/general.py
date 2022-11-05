@@ -9,8 +9,9 @@ from datetime import datetime, timedelta, timezone
 load_dotenv()
 
 def hash_password(user_password):
+    print(user_password)
     encoded_pw = user_password.encode('utf-8')
-    salt = bcrypt.gensalt();
+    salt = bcrypt.gensalt()
     hash = bcrypt.hashpw(encoded_pw, salt)
     return hash
 

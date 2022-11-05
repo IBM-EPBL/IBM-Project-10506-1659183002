@@ -9,12 +9,18 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     api = Api(app)
     CORS(app)
-
+    
+    # Endpoint: Authentication
     from .controllers.auth import Register, Login, Logout, EmailVerification
     api.add_resource(Register, '/api/auth/register')
     api.add_resource(Login, '/api/auth/login')
     api.add_resource(EmailVerification, '/api/auth/verify')
     api.add_resource(Logout, '/api/auth/logout')
+
+    # Endpoint: Income
+    from .controllers.income import Income, SplitIncome
+    api.add_resource(Income, '/api/income')
+    api.add_resource(SplitIncome, '/api/income/split')
 
     @app.route('/hello')
     def hello():

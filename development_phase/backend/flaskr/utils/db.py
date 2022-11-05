@@ -20,14 +20,17 @@ def run_sql_insert(query,params):
     try:
         stmt=ibm_db.prepare(conn,query)
         ibm_db.execute(stmt,params)
+        print('true')
         return True
     except:
+        print('false')
         return False
 
 def run_sql_update(query, params):
     try:
         stmt=ibm_db.prepare(conn, query)
         ibm_db.execute(stmt, params)
+        print('true')
         return True
 
     except:

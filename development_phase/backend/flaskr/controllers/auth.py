@@ -1,5 +1,4 @@
 from datetime import datetime
-from lib2to3.pgen2 import token
 from flask import request, after_this_request
 from flask_restful import Resource
 from ..utils import validate, general, db
@@ -55,7 +54,8 @@ class EmailVerification(Resource):
 
         jwt_data = {
             "id": user["ID"],
-            "email": email
+            "email": email,
+            "timestamp": 0
         }
         token = general.create_jwt_token(jwt_data)
 
@@ -80,8 +80,11 @@ class Login(Resource):
         
         user = validate_result["user"]
         jwt_data = {
-            "email": user["EMAIL"]
+            "id": user["ID"],
+            "email": user["EMAIL"],
+            "timestamp": user["TIMESTAMP"]
         }
+        print(jwt_data)
         token = general.create_jwt_token(jwt_data)
         @after_this_request
         def set_cookie(response):

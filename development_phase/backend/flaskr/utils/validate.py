@@ -34,3 +34,15 @@ def validate_login(user_data):
         return {"error": ({"message": "Please verify the E-Mail to Login", "next_resend": get_user["NEXT_RESEND"]}, 401)}
 
     return {"user" : get_user}
+
+def validate_add_income(user_data):
+    if(user_data["amount"] == "" and user_data["timestamp"] == ""):
+        return { "error": ({'message': 'Please fill the Required data'}, 400) }
+    
+    return False
+ 
+def validate_split_income(user_data):
+    if(user_data["amount"] == "" and user_data["label"] == ""):
+        return { "error": ({'message': 'Please fill the Required data'}, 400) }
+    
+    return False
