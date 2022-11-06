@@ -24,6 +24,13 @@ class Income(Resource):
 
 class SplitIncome(Resource):
     @token_required
+    def get(payload, self):
+        sql_query = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label"
+        params = (payload["id"],)
+        data = db.run_sql_select(sql_query, params)
+        return {"data": data}, 200
+    
+    @token_required
     def post(payload, self):
         user_data = request.json
         validate_result = validate.validate_add_income(user_data=user_data)
@@ -42,14 +49,20 @@ class SplitIncome(Resource):
 
     @token_required
     def delete(payload, self, id):
-        # user_data = request.json
-        # validate_result = validate.validate_add_income(user_data=user_data)
-
-        # if(validate_result):
-        #     return validate_result
-
-        sql_query = "DELETE FROM split_income WHERE id=?"
-        params = (id)
+        labelId = {
+                    0: "Food & Drinks",
+                    1:"Entertainment",
+                    2:"Shopping",
+                    3:"Transportation",
+                    4:"Vehicle",
+                    5:"Trip",
+                    6:"General Expense",
+                    7:"Financial Expense",
+                    8:"Income"
+                }
+        label = labelId[id]
+        sql_query = "DELETE FROM split_income WHERE user_id=? AND label=?"
+        params = (payload["id"], label)
         run_status = db.run_sql_delete(sql_query, params=params)
 
         if(not run_status):

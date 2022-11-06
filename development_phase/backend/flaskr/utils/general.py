@@ -28,28 +28,17 @@ def generate_timestamp(value, is_day):
         dt = now + timedelta(days=value)
         return int(dt.timestamp())
     dt = now + timedelta(minutes=value)
-    print('in')
-    print(now.strftime("%Y-%m-%d %H:%M:%S"))
-    print(dt.strftime("%Y-%m-%d %H:%M:%S"))
-    print(now.timestamp() * 1000)
-    print(dt.timestamp() * 1000)
-    print('ot')
     return int(dt.timestamp() * 1000)
 
 def create_jwt_token(data):
     data["exp"] = generate_timestamp(1, True)
-    print(data)
     token = jwt.encode(data, getenv('JWT_SECRET_KEY'), algorithm="HS256")
-    print(token)
     return token
 
 
 def validate_jwt_token(token):
     try:
-        now = datetime.now(tz=timezone.utc)
-        print(int(now.timestamp()))
         decoded_content = jwt.decode(token, getenv('JWT_SECRET_KEY'), algorithms=["HS256"])
-        print(decoded_content)
     except jwt.ExpiredSignatureError:
         return {"is_valid": False, "message": "Token expired"}
     except jwt.InvalidSignatureError:
@@ -64,7 +53,6 @@ def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         auth_token = request.cookies.get("auth_token")
-        print(auth_token)
         if(not auth_token):
             return ({"message": "No Token"}, 400)
         res = validate_jwt_token(auth_token)

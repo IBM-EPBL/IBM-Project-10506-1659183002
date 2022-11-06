@@ -70,7 +70,13 @@ class Login(Resource):
     @token_required
     def get(payload, self):
         print(payload)
-        return {"message": "User Logged In", "email": payload['email']}, 200
+        sql_query_user = "SELECT total_amount, timestamp FROM user WHERE id=?"
+        sql_query_split = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label"
+        # sql_query = "select si.id, total_amount, amount, label, timestamp from user as u left join split_income as si on u.id = si.user_id where u.id=?"
+        params = (payload["id"],)
+        user_data = db.run_sql_select(sql_query_user, params)
+        split_data = db.run_sql_select(sql_query_split, params)
+        return {"message": "User Logged In", "user_data": user_data[0], "split_data":split_data, "email": payload['email']}, 200
 
     def post(self):   
         validate_result = validate.validate_login(user_data=request.json)
