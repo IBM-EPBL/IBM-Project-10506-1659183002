@@ -39,7 +39,7 @@ const isUserLoggedIn = async () => {
     return res;
 }
 
-const toggleUserLogged = (isLoggedIn, username, incomeData) => {
+const toggleUserLogged = (isLoggedIn, username, userData, incomeData) => {
     const navLogin = document.querySelector(".login");
     const navUser = document.querySelector(".user");
     if(isLoggedIn){
@@ -47,7 +47,7 @@ const toggleUserLogged = (isLoggedIn, username, incomeData) => {
         navUser.classList.remove("none");
         username = username.split('@');
         navUser.querySelector(".user-name").innerText = username[0];
-        user.setInitial(username[0], incomeData[0]["TOTAL_AMOUNT"], incomeData);
+        user.setInitial(username[0], userData, incomeData);
         console.log(user.getData('username'));
     }
     else{
@@ -62,7 +62,7 @@ window.addEventListener("load", async () => {
     const data = await res.json();
     console.log(data);
     if(res.status == 200){
-        toggleUserLogged(true, data['email'], data['data'])
+        toggleUserLogged(true, data['email'], data['user_data'], data['split_data'])
         loadData(data['data']);
         loadIncomeFunction();
     }

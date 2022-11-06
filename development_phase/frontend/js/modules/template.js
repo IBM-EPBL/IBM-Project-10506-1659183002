@@ -1,7 +1,8 @@
 export const split_data_template = (split_data) => {
     const div = document.createElement("div");
     div.classList.add("split-value");
-    div.dataset.id = split_data.ID;
+    div.dataset.value = split_data.LABEL;
+    console.log(div.dataset.value);
     div.innerHTML =`<div class="split-label no-overflow">${split_data.LABEL}</div>
                     <div class="split-amount no-overflow">${split_data.AMOUNT}</div>
                     <div class="split-balance no-overflow">balance</div>

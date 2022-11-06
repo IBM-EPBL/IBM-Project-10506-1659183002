@@ -60,14 +60,14 @@
                         <div class="expense-label">
                             <label for="amount-label">Category:</label>
                             <select name="label" id="amount-label">
-                                <option value="Food-Drinks">Food & Drinks</option>
+                                <option value="Food & Drinks">Food & Drinks</option>
                                 <option value="Entertainment">Entertainment</option>
                                 <option value="Shopping">Shopping</option>
                                 <option value="Transportation">Transportation</option>
                                 <option value="Vehicle">Vehicle</option>
                                 <option value="Trip">Trip</option>
-                                <option value="General-Expense">General Expense</option>
-                                <option value="Financial-Exense">Financial Exense</option>
+                                <option value="General Expense">General Expense</option>
+                                <option value="Financial Expense">Financial Expense</option>
                                 <option value="Income">Income</option>
                             </select>
                         </div>
@@ -80,37 +80,38 @@
                     </div>
                 </div>
                 <div class="split-income">
-                    <form action="">
+                    <form action="" class="split-income-form">
                         <div class="split-type">
                             <div for="split-by">Split By:</div>
                             <div>
-                                <input type="radio" id="split-percent" name="split-type" class="radio">
+                                <input type="radio" id="split-percent" name="split-type" value="percent" class="radio">
                                 <label for="split-percent">Percentage</label>
                             </div>
                             <div>
-                                <input type="radio" id="split-amount-inp" name="split-type" class="radio" checked>
-                                <label for="split-amount-inp">Amount</label>
+                                <input type="radio" id="split-amount-rad" name="split-type" class="radio" value="amount" checked>
+                                <label for="split-amount-rad">Amount</label>
                             </div>
                         </div>
                         <div class="split-value-inp">
                             <label for="split-inp">Enter Value:</label>
-                            <input type="number" placeholder="0" id="split-inp">
+                            <input type="number" placeholder="0" id="split-amount-inp">
                         </div>
                         <div class="split-preview">Split Value:&nbsp;<span>Rs 200.00</span></div>
                         <div class="expense-label">
                             <label for="split-label">Category:</label>
                             <select name="label" id="split-label">
-                                <option value="Food-Drinks">Food & Drinks</option>
+                                <option value="Food & Drinks">Food & Drinks</option>
                                 <option value="Entertainment">Entertainment</option>
                                 <option value="Shopping">Shopping</option>
                                 <option value="Transportation">Transportation</option>
                                 <option value="Vehicle">Vehicle</option>
                                 <option value="Trip">Trip</option>
-                                <option value="General-Expense">General Expense</option>
-                                <option value="Financial-Exense">Financial Exense</option>
+                                <option value="General Expense">General Expense</option>
+                                <option value="Financial Expense">Financial Expense</option>
                                 <option value="Income">Income</option>
                             </select>
                         </div>
+                        <button class="expense-split-btn">Update</button>
                     </form>
                     <div class="split-data-cnt">
                         <h5>Split Data</h5>

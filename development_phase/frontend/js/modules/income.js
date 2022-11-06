@@ -1,4 +1,5 @@
 import { endpoint } from "./endpoint.js";
+import { labelId } from "./label.js";
 import { split_data_template } from "./template.js";
 import { user } from "./user_data.js";
 
@@ -25,12 +26,10 @@ const editIncome = (e) => {
 
 const updateIncome = async (amount) => {
     const timestamp = Date.now();
-    console.log(timestamp)
     const data = {
         amount,
         timestamp
     };
-    console.log('hi')
     const res = await fetch(endpoint.add_income, {
         method:"POST",
         credentials: 'include',
@@ -44,13 +43,11 @@ const updateIncome = async (amount) => {
         user.setData('balance', amount);
         document.querySelector(".balance span").innerText = amount;
     }
-    console.log(status);
 }
 
 export const updateBalance = (amount) => {
     const balanceEle = document.querySelector(".balance span");
-    console.log(balanceEle, amount)
-    balanceEle.innerText = +amount;
+    balanceEle.innerText = amount;
 }
 
 export const updateSplitData = () => {
@@ -61,12 +58,118 @@ export const updateSplitData = () => {
         split_data_cnt.removeChild(ele);
     })
     user.getData('splitData').forEach(data => {
-        split_data_cnt.appendChild(split_data_template(data))
+        const split_value_div = split_data_template(data);
+        split_data_cnt.appendChild(split_value_div);
+        split_value_div.querySelector(".split-edit").addEventListener("click", removeSplitData);
     });
+}
+
+// income split
+let splitAmount = 0;
+let label = "Food & Drinks";
+const updateLabelValue = (e) => {
+    label =e.target.value;
+}
+const updateSplitPreview = (amount) => {
+    const splitCnt = document.querySelector(".split-preview span");
+    const isPercent = document.querySelector('input[name="split-type"]:checked').value;
+    console.log('hi')
+    if(isPercent === "percent"){
+        amount = amount > 100 ? 100 : amount;
+        splitAmountInp.value = amount;
+        amount = calculateAmount(amount)
+    }
+    else{
+        if(amount > user.getData('balance')){
+            amount = user.getData('balance');
+            splitAmountInp.value = amount;
+        }
+    }
+    splitCnt.innerText = `Rs ${amount}`;
+    splitAmount = amount
+}
+
+const calculateAmount = (percentage) => {
+    const balance = user.getData('balance');
+    const amount = ((balance / 100) * percentage).toFixed(2);
+    return amount
+}
+
+const splitAmountInp = document.querySelector("#split-amount-inp");
+const radioOptions = document.querySelectorAll('input[name="split-type"]');
+const labelDropDown = document.querySelector("#split-label");
+const splitIncomeForm = document.querySelector(".split-income-form")
+const changeSplitOnUpdate = (e) => {
+    updateSplitPreview(+splitAmountInp.value)
+}
+
+let isSplitProgress = false;
+const addSplitIncome = async (e) => {
+    e.preventDefault();
+    if(splitAmount === 0 || isSplitProgress){
+        return;
+    }
+    isSplitProgress = true;
+    const data = {
+        amount: splitAmount,
+        label
+    };
+    const res = await fetch(endpoint.split_income, {
+        method:"POST",
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    const msg = await res.json();
+    isSplitProgress = false;
+    if(res.status === 200){
+        const res = await fetch(endpoint.split_income, {
+            method:"GET",
+            credentials: 'include',
+        });
+        const resData = await res.json();
+        if(res.status === 200){
+            user.setData('splitData', resData["data"]);
+            updateSplitData();
+        }
+    }
+}
+
+let isRemoveTriggered = false;
+const removeSplitData = async (e) => {
+    if(isRemoveTriggered){
+        return;
+    }
+    isRemoveTriggered = true;
+    const id = labelId[e.currentTarget.parentElement.dataset.value]
+    const res = await fetch(endpoint.split_income_del(id), {
+        method:"DELETE",
+        credentials: 'include',
+    });
+    if(res.status === 200){
+        const res = await fetch(endpoint.split_income, {
+            method:"GET",
+            credentials: 'include',
+        });
+        const resData = await res.json();
+        if(res.status === 200){
+            user.setData('splitData', resData["data"]);
+            updateSplitData();
+        }
+    }
+    isRemoveTriggered = false;
 }
 
 export const loadIncomeFunction = () => {
     editIncomeBtn.addEventListener("click", editIncome);
     tickBtn.addEventListener("click", editIncome);
     incomeForm.addEventListener("submit", editIncome);
+    radioOptions.forEach(ele => {
+        ele.addEventListener("change", changeSplitOnUpdate);
+    });
+    labelDropDown.addEventListener("change", updateLabelValue);
+    splitAmountInp.addEventListener("change", changeSplitOnUpdate);
+    splitIncomeForm.addEventListener("submit", addSplitIncome);
 }
