@@ -1,3 +1,8 @@
+import { endpoint } from "./modules/endpoint.js";
+import { loadIncomeFunction } from "./modules/income.js";
+import { loadData } from "./modules/starter.js";
+import { user } from "./modules/user_data.js";
+
 // Toggle different views - expense, split, alert
 const headerToggler = document.querySelectorAll(".header-btn");
 let activeHeader = document.querySelector(".expense-add");
@@ -12,14 +17,6 @@ headerToggler.forEach(btn => {
         activeHeader = toActivate;
     })
 })
-
-
-const baseURL = "http://localhost:5000"
-
-const endpoint = {
-    "login": `${baseURL}/api/auth/login`,
-    "logout": `${baseURL}/api/auth/logout`,
-}
 
 const logoutBtn = document.querySelector(".user-logout");
 
@@ -42,7 +39,7 @@ const isUserLoggedIn = async () => {
     return res;
 }
 
-const toggleUserLogged = (isLoggedIn, username) => {
+const toggleUserLogged = (isLoggedIn, username, incomeData) => {
     const navLogin = document.querySelector(".login");
     const navUser = document.querySelector(".user");
     if(isLoggedIn){
@@ -50,7 +47,8 @@ const toggleUserLogged = (isLoggedIn, username) => {
         navUser.classList.remove("none");
         username = username.split('@');
         navUser.querySelector(".user-name").innerText = username[0];
-
+        user.setInitial(username[0], incomeData[0]["TOTAL_AMOUNT"], incomeData);
+        console.log(user.getData('username'));
     }
     else{
         navLogin.classList.remove("none");
@@ -64,7 +62,8 @@ window.addEventListener("load", async () => {
     const data = await res.json();
     console.log(data);
     if(res.status == 200){
-        toggleUserLogged(true, data['email'])
+        toggleUserLogged(true, data['email'], data['data'])
+        loadData(data['data']);
+        loadIncomeFunction();
     }
-
 });

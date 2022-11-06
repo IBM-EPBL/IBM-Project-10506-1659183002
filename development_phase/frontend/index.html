@@ -22,18 +22,19 @@
     <main>
         <div class="col-1">
             <div class="income-cnt">
-                <form action="">
+                <form action="" class="user-income-form">
                     <div class="income">
                         <label for="income">Total Budget:</label>
                         <div class="income-inp">
-                            <input type="number" name="income" id="income" value="0" readonly>
+                            <input type="number" name="income" id="income" placeholder=0 readonly>
                             <div class="budget-logo">
                                 <img src="./assets/budget.svg" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="edit-logo">
-                        <img src="./assets/edit.svg" alt="">
+                        <img class="edit-income-ic" src="./assets/edit.svg" alt="edit income button">
+                        <img class="accept-income-ic none" src="./assets/tick.svg" alt="accept income button">
                     </div>
                 </form>
                 <div class="balance-cnt">
@@ -46,7 +47,7 @@
                     <h3 class="header-btn btn-income" data-class="split-income">Split Income</h3>
                     <h3 class="header-btn btn-alert" data-class="set-alert">Set Alert</h3>
                 </div>
-                <div class="expense-add">
+                <div class="expense-add none">
                     <form action="">
                         <div class="expense-amount">
                             <label for="amount-inp">Enter Amount:</label>
@@ -78,7 +79,7 @@
                         <div class="label-value" data-value="Trip">Trip</div>
                     </div>
                 </div>
-                <div class="split-income none">
+                <div class="split-income">
                     <form action="">
                         <div class="split-type">
                             <div for="split-by">Split By:</div>
@@ -116,7 +117,6 @@
                         <div class="split-values">
                             <div class="split-value">
                                 <div class="split-label">Label</div>
-                                <div class="split-from">From</div>
                                 <div class="split-amount">Amount</div>
                                 <div class="split-amount">Balance</div>
                                 <div class="split-alert">Alert</div>
@@ -127,87 +127,6 @@
                                 <div class="split-balance no-overflow">400.00</div>
                                 <div class="split-alert no-overflow">2040.00</div>
                                 <div class="split-edit">
-                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
-                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
-                                </div>
-                            </div>
-                            <div class="split-value" data-id="">
-                                <div class="split-label">Label</div>
-                                <div class="split-from">From</div>
-                                <div class="split-amount">Amount</div>
-                                <div class="split-alert">Alert</div>
-                                <div class="split-edit">
-                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
-                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
-                                </div>
-                            </div>
-                            <div class="split-value" data-id="">
-                                <div class="split-label">Label</div>
-                                <div class="split-from">From</div>
-                                <div class="split-amount">Amount</div>
-                                <div class="split-alert">Alert</div>
-                                <div class="split-edit">
-                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
-                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
-                                </div>
-                            </div>
-                            <div class="split-value" data-id="">
-                                <div class="split-label">Label</div>
-                                <div class="split-from">From</div>
-                                <div class="split-amount">Amount</div>
-                                <div class="split-alert">Alert</div>
-                                <div class="split-edit">
-                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
-                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
-                                </div>
-                            </div>
-                            <div class="split-value" data-id="">
-                                <div class="split-label">Label</div>
-                                <div class="split-from">From</div>
-                                <div class="split-amount">Amount</div>
-                                <div class="split-alert">Alert</div>
-                                <div class="split-edit">
-                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
-                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
-                                </div>
-                            </div>
-                            <div class="split-value" data-id="">
-                                <div class="split-label">Label</div>
-                                <div class="split-from">From</div>
-                                <div class="split-amount">Amount</div>
-                                <div class="split-alert">Alert</div>
-                                <div class="split-edit">
-                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
-                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
-                                </div>
-                            </div>
-                            <div class="split-value" data-id="">
-                                <div class="split-label">Label</div>
-                                <div class="split-from">From</div>
-                                <div class="split-amount">Amount</div>
-                                <div class="split-alert">Alert</div>
-                                <div class="split-edit">
-                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
-                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
-                                </div>
-                            </div>
-                            <div class="split-value" data-id="">
-                                <div class="split-label">Label</div>
-                                <div class="split-from">From</div>
-                                <div class="split-amount">Amount</div>
-                                <div class="split-alert">Alert</div>
-                                <div class="split-edit">
-                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
-                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
-                                </div>
-                            </div>
-                            <div class="split-value" data-id="">
-                                <div class="split-label">Label</div>
-                                <div class="split-from">From</div>
-                                <div class="split-amount">Amount</div>
-                                <div class="split-alert">Alert</div>
-                                <div class="split-edit">
-                                    <div class="split-edit-ic"><img src="./assets/edit.svg" alt="edit-split"></div>
                                     <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
                                 </div>
                             </div>
@@ -218,6 +137,6 @@
             </div>
         </div>
     </main>
-    <script src="./js/index.js"></script>
+    <script type="module" src="./js/index.js"></script>
 </body>
 </html>
