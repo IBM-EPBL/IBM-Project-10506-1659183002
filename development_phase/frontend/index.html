@@ -47,15 +47,15 @@
                     <h3 class="header-btn btn-income" data-class="split-income">Split Income</h3>
                     <h3 class="header-btn btn-alert" data-class="set-alert">Set Alert</h3>
                 </div>
-                <div class="expense-add none">
-                    <form action="">
+                <div class="expense-add">
+                    <form action="" class="expense-add-form">
                         <div class="expense-amount">
                             <label for="amount-inp">Enter Amount:</label>
                             <input type="number" placeholder="0" id="amount-inp">
                         </div>
                         <div class="expense-type">
-                            <div class="type-income"><span>Income</span>&nbsp;<img src="./assets/add.svg" alt="Add Income"></div>
-                            <div class="type-expense active"><span>Expense</span>&nbsp;<img src="./assets/minus.svg" alt="Add Expense"></div>
+                            <div class="type-income radio-type-expense" data-value="true"><span>Income</span>&nbsp;<img src="./assets/add.svg" alt="Add Income"></div>
+                            <div class="type-expense radio-type-expense active" data-value="false"><span>Expense</span>&nbsp;<img src="./assets/minus.svg" alt="Add Expense"></div>
                         </div>
                         <div class="expense-label">
                             <label for="amount-label">Category:</label>
@@ -71,6 +71,7 @@
                                 <option value="Income">Income</option>
                             </select>
                         </div>
+                        <button class="expense-split-btn">Update</button>
                     </form>
                     <div class="label-suggestion">
                         <div class="label-value active" data-value="Food-Drinks">Food & Drinks</div>
@@ -79,7 +80,7 @@
                         <div class="label-value" data-value="Trip">Trip</div>
                     </div>
                 </div>
-                <div class="split-income">
+                <div class="split-income none">
                     <form action="" class="split-income-form">
                         <div class="split-type">
                             <div for="split-by">Split By:</div>

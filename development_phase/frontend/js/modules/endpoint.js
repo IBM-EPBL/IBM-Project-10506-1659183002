@@ -5,5 +5,7 @@ export const endpoint = {
     "logout": `${baseURL}/api/auth/logout`,
     "add_income": `${baseURL}/api/income`,
     "split_income": `${baseURL}/api/income/split`,
-    "split_income_del": (id) => `${baseURL}/api/income/split/${id}`
+    "split_income_del": (id) => `${baseURL}/api/income/split/${id}`,
+    "add_expense": `${baseURL}/api/add/expense`,
+    "delete_expense" : (id) => `${baseURL}/api/delete/expense/${id}`
 }

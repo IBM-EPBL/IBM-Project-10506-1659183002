@@ -57,8 +57,10 @@ export const updateSplitData = () => {
         if(idx == 0)  return;
         split_data_cnt.removeChild(ele);
     })
+    console.log(user.getData('splitData'))
     user.getData('splitData').forEach(data => {
         const split_value_div = split_data_template(data);
+        console.log(split_value_div);
         split_data_cnt.appendChild(split_value_div);
         split_value_div.querySelector(".split-edit").addEventListener("click", removeSplitData);
     });
@@ -125,15 +127,23 @@ const addSplitIncome = async (e) => {
     const msg = await res.json();
     isSplitProgress = false;
     if(res.status === 200){
-        const res = await fetch(endpoint.split_income, {
-            method:"GET",
-            credentials: 'include',
-        });
-        const resData = await res.json();
-        if(res.status === 200){
-            user.setData('splitData', resData["data"]);
-            updateSplitData();
-        }
+        user.updateSplitData(data);
+        updateSplitData();
+        splitAmountInp.value = ""
+    }
+}
+
+export const fetchSplitIncome = async () => {
+    const res = await fetch(endpoint.split_income, {
+        method:"GET",
+        credentials: 'include',
+    });
+    const resData = await res.json();
+    console.log(resData)
+    if(res.status === 200){
+        // user.setSplitData(resData["data"]);
+        user.setSplitData(resData['split_data'], resData['balance_data']);
+        updateSplitData();
     }
 }
 
@@ -143,21 +153,15 @@ const removeSplitData = async (e) => {
         return;
     }
     isRemoveTriggered = true;
-    const id = labelId[e.currentTarget.parentElement.dataset.value]
+    const label = e.currentTarget.parentElement.dataset.value;
+    const id = labelId[label]
     const res = await fetch(endpoint.split_income_del(id), {
         method:"DELETE",
         credentials: 'include',
     });
     if(res.status === 200){
-        const res = await fetch(endpoint.split_income, {
-            method:"GET",
-            credentials: 'include',
-        });
-        const resData = await res.json();
-        if(res.status === 200){
-            user.setData('splitData', resData["data"]);
-            updateSplitData();
-        }
+        user.removeSplitData(label);
+        updateSplitData();
     }
     isRemoveTriggered = false;
 }

@@ -1,4 +1,5 @@
 import { endpoint } from "./modules/endpoint.js";
+import { loadExpenseFunction } from "./modules/expense.js";
 import { loadIncomeFunction } from "./modules/income.js";
 import { loadData } from "./modules/starter.js";
 import { user } from "./modules/user_data.js";
@@ -39,7 +40,7 @@ const isUserLoggedIn = async () => {
     return res;
 }
 
-const toggleUserLogged = (isLoggedIn, username, userData, incomeData) => {
+const toggleUserLogged = (isLoggedIn, username, userData, incomeData, balance_data) => {
     const navLogin = document.querySelector(".login");
     const navUser = document.querySelector(".user");
     if(isLoggedIn){
@@ -47,7 +48,7 @@ const toggleUserLogged = (isLoggedIn, username, userData, incomeData) => {
         navUser.classList.remove("none");
         username = username.split('@');
         navUser.querySelector(".user-name").innerText = username[0];
-        user.setInitial(username[0], userData, incomeData);
+        user.setInitial(username[0], userData, incomeData, balance_data);
         console.log(user.getData('username'));
     }
     else{
@@ -62,8 +63,9 @@ window.addEventListener("load", async () => {
     const data = await res.json();
     console.log(data);
     if(res.status == 200){
-        toggleUserLogged(true, data['email'], data['user_data'], data['split_data'])
+        toggleUserLogged(true, data['email'], data['user_data'], data['split_data'], data['balance_data'])
         loadData(data['data']);
+        loadExpenseFunction();
         loadIncomeFunction();
     }
 });

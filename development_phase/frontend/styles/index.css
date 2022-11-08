@@ -350,6 +350,7 @@ input{
 .expense-split-btn{
     padding: .5rem 1.5rem;
     font-size: 1.2rem;
+    margin-bottom: .5rem;
     cursor: pointer;
     background-color: var(--primary);
     color: var(--secondary);
