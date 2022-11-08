@@ -11,7 +11,7 @@ class Income(Resource):
         validate_result = validate.validate_add_income(user_data=user_data)
 
         if(validate_result):
-            return validate_result
+            return validate_result["error"]
         
         sql_query = "UPDATE user SET total_amount=?, timestamp=? WHERE id=?"
         params = (user_data["amount"], user_data["timestamp"], payload["id"])
@@ -25,18 +25,21 @@ class Income(Resource):
 class SplitIncome(Resource):
     @token_required
     def get(payload, self):
-        sql_query = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label"
+        sql_query = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label ORDER BY LABEL"
+        sql_balance = "select label, sum(case when is_income = true then amount else -amount end) as balance from expense group by label"
         params = (payload["id"],)
-        data = db.run_sql_select(sql_query, params)
-        return {"data": data}, 200
+        split_data = db.run_sql_select(sql_query, params)
+        balance_data = db.run_sql_select(sql_balance, params)
+        return {"split_data": split_data, "balance_data": balance_data}, 200
     
     @token_required
     def post(payload, self):
         user_data = request.json
-        validate_result = validate.validate_add_income(user_data=user_data)
+        print(user_data)
+        validate_result = validate.validate_split_income(user_data=user_data)
 
         if(validate_result):
-            return validate_result
+            return validate_result["error"]
            
         sql_query = "INSERT INTO split_income (user_id, amount, label) VALUES(?, ?, ?)"
         params = ( payload["id"], user_data["amount"], user_data["label"])

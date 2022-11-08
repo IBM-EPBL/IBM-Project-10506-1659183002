@@ -71,12 +71,16 @@ class Login(Resource):
     def get(payload, self):
         print(payload)
         sql_query_user = "SELECT total_amount, timestamp FROM user WHERE id=?"
-        sql_query_split = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label"
-        # sql_query = "select si.id, total_amount, amount, label, timestamp from user as u left join split_income as si on u.id = si.user_id where u.id=?"
+        sql_query_split = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label ORDER BY LABEL"
+        sql_balance = "select label, sum(case when is_income = true then amount else -amount end) as balance from expense group by label"
         params = (payload["id"],)
         user_data = db.run_sql_select(sql_query_user, params)
         split_data = db.run_sql_select(sql_query_split, params)
-        return {"message": "User Logged In", "user_data": user_data[0], "split_data":split_data, "email": payload['email']}, 200
+        balance_data = db.run_sql_select(sql_balance, params)
+        sql_query_expense = "SELECT id, amount, is_income, label, timestamp FROM expense WHERE user_id = ? AND timestamp >= ?"
+        params = (payload["id"], user_data[0]["TIMESTAMP"])
+        expense_data = db.run_sql_select(sql_query_expense, params)
+        return {"message": "User Logged In", "user_data": user_data[0], "split_data":split_data, "balance_data": balance_data, "expense_data":expense_data, "email": payload['email']}, 200
 
     def post(self):   
         validate_result = validate.validate_login(user_data=request.json)

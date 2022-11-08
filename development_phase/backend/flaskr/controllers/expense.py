@@ -8,10 +8,12 @@ class Expense(Resource):
     @token_required
     def post(payload, self):
         user_data = request.json
+        print(request.json)
         validate_result = validate.validate_add_expense(user_data=user_data)
-
+        print(validate_result)
         if(validate_result):
-            return validate_result
+            print('exp')
+            return validate_result["error"]
             
         sql_query = "INSERT INTO expense (user_id, amount, is_income, label, timestamp) values(?, ?, ?, ?, ?)"
         params = (payload["id"], user_data["amount"], user_data["is_income"], user_data["label"], user_data["timestamp"])

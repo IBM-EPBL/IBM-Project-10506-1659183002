@@ -10,7 +10,7 @@ def validate_register(user_data):
         return {'message': 'User already exist'}, 409
 
     if(user_data["password"] != user_data["re_password"]):
-        return {'message': 'Password and confirm password does not match'}, 400
+        return {'message': 'Password or confirm password does not match'}, 400
 
     if(len(user_data["password"]) < 8 or len(user_data["password"]) > 16):
         return {'message': 'Password length must be 8 to 16'}, 400
@@ -37,19 +37,21 @@ def validate_login(user_data):
     return {"user" : get_user}
 
 def validate_add_income(user_data):
-    if(user_data["amount"] == "" and user_data["timestamp"] == ""):
+    if(user_data["amount"] == "" or user_data["timestamp"] == ""):
         return { "error": ({'message': 'Please fill the Required data'}, 400) }
     
     return False
  
-def validate_split_income(user_data, type):
-    if((type == "insert" and user_data["amount"] == "" and user_data["label"] == "") or (type == "update" and user_data["amount"] == "")):
+def validate_split_income(user_data):
+    if(user_data["amount"] == 0 or user_data["label"] == ""):
         return { "error": ({'message': 'Please fill the Required data'}, 400) }
     
     return False
 
 def validate_add_expense(user_data):
-    if(user_data["amount"] == "" and user_data["type"] == "" and user_data["category"] == ""):
+    print(user_data["amount"])
+    if(user_data["amount"] == 0 or user_data["label"] == "" or user_data["timestamp"] == "" or user_data["is_income"] == ""):
+        print('in')
         return { "error": ({'message': 'Please fill the Required data'}, 400) }
     
     return False
