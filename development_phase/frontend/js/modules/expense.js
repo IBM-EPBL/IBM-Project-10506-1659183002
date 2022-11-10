@@ -1,5 +1,7 @@
 import { endpoint } from "./endpoint.js";
 import { fetchSplitIncome } from "./income.js";
+import { expense_data_template } from "./template.js";
+import { user } from "./user_data.js";
 
 let is_income = false;
 let label = "Food & Drinks";
@@ -48,6 +50,18 @@ const addExpense = async (e) => {
         amountInp.value = "";
         fetchSplitIncome();
     }
+}
+
+export const updateExpenseDate = () => {
+    const expenseValuesCnt = document.querySelector(".expense-his-values");
+    const expenseValueCnt = document.querySelectorAll(".expense-his-value");
+    expenseValueCnt.forEach(child => {
+        expenseValuesCnt.removeChild(child);
+    })
+    user.getData('expenseData').forEach(eachData => {
+        const valueDiv = expense_data_template(eachData);
+        expenseValuesCnt.appendChild(valueDiv)
+    })
 }
 
 export const loadExpenseFunction = () => {

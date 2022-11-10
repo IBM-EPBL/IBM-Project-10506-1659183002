@@ -76,6 +76,14 @@ header nav a:hover{
     color: var(--secondary);
 }
 
+.positive{
+    color: var(--positive);
+}
+
+.negative{
+    color: var(--negative)
+}
+
 .none{
     display: none !important;
 }

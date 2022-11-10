@@ -14,3 +14,19 @@ export const split_data_template = (split_data) => {
                     </div>`
     return div;
 };
+
+export const expense_data_template = (expense_data) => {
+    const div = document.createElement("div");
+    div.classList.add("expense-his-value");
+    div.dataset.id = expense_data.TIMESTAMP;
+    const date = new Date(expense_data.TIMESTAMP)
+    const dateStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+    const timeStr = `${date.getHours()}:${date.getMinutes()}`
+    div.innerHTML =`<div class="expense-value-label">${expense_data.LABEL}</div>
+                    <div class="expense-value-date">
+                        <div class="date-date">${dateStr}</div>
+                        <div class="date-time">${timeStr}</div>
+                    </div>
+                    <div class="expense-value-amount ${expense_data.IS_INCOME ? 'positive' : 'negative'}">Rs. ${expense_data.AMOUNT}</div>`
+    return div;
+}

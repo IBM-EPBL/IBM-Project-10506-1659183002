@@ -21,7 +21,14 @@ header nav .user .user-logout{
 }
 
 main{
-    margin: 1rem;
+    margin: 1rem 0 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1rem;
+}
+
+main > div{
+    margin: 0 auto;
 }
 
 .income-cnt{
@@ -126,6 +133,16 @@ input{
     color: var(--negative)
 }
 
+.income-cnt .from-date-disp{
+    text-align: center;
+    border-top: 1px solid var(--secondary-transparent);
+    padding: .5rem 0;
+}
+
+.income-cnt .from-date-disp span{
+    color: var(--accent)
+}
+
 .expense{
     font-size: var(--font-clamp);
     width: var(--box-width);
@@ -220,7 +237,7 @@ input{
     margin: 2rem 0;
 }
 
-.expense-label #amount-label, #split-label{
+.expense-label #amount-label, #split-label, #filter-label{
     font-size: var(--inp-font-clamp);
     background-color: transparent;
     color: var(--accent);
@@ -347,7 +364,7 @@ input{
     height: 40px;
 }
 
-.expense-split-btn{
+.expense-split-btn, .filter-update-btn{
     padding: .5rem 1.5rem;
     font-size: 1.2rem;
     margin-bottom: .5rem;
@@ -362,4 +379,126 @@ input{
 .expense-split-btn:hover{
     background-color: var(--box-bg);
     border-color: var(--secondary-transparent);
+}
+
+.col-2{
+    width: 100%;
+    height: calc(100vh - 150px);
+}
+
+.expense-data{
+    background-color: var(--box-bg);
+    padding: .5rem;
+    width: 80%;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+    position: relative;
+    margin: 0 auto;
+}
+
+.expense-data h1{
+    margin: .5rem 0;
+    text-align: center;
+    align-self: center;
+    font-size: 1.6rem;
+    color: var(--accent);
+}
+
+.expense-filter{
+    border-top: 1px solid var(--secondary-transparent);
+    border-bottom: 1px solid var(--secondary-transparent);
+    display: flex;
+    background-color: var(--primary);
+    flex-direction: column;
+    padding: .5rem 1rem;
+}
+
+.expense-filter h2{
+    font-size: 1.3rem;
+}
+
+.expense-filter .date-filter{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    font-size: 1rem;
+}
+
+.filter-update-btn-cnt{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-update-btn{
+    width: unset;
+    background-color: var(--secondary-transparent);
+    color: var(--primary);
+    width: 40%;
+    padding: 0.2rem;
+    margin: 1rem 0;
+    font-size: 1rem;
+    border: 1px solid transparent\;
+}
+
+.filter-update-btn:hover{
+    background-color: var(--box-bg);
+    color: var(--secondary);
+    border-color: var(--accent);
+}
+
+
+.date-filter > div{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.expense-filter input{
+    color: var(--accent);
+    border-color: var(--secondary);
+    font-size: 1.2rem;
+}
+
+.expense-filter .label-filter{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.expense-his{
+    margin: 1rem 0;
+    
+}
+
+.expense-his-header, .expense-his-value{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 0 .5rem 0;
+    border-bottom: 1px solid var(--secondary-transparent);
+    gap: 1rem;
+    margin: 0 2rem;
+}
+
+.expense-his-header > h3, .expense-his-value > div{
+    margin: 0 auto;
+}
+
+.expense-his-header{
+    color: var(--accent);
+}
+
+.expense-his-value{
+    padding: .5rem 0;
+}
+
+.expense-his-value > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

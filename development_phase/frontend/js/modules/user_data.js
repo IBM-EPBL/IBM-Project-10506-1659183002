@@ -2,18 +2,25 @@ const User = () => {
     const data = {}
     data.balanceEachMap = {};
 
-    const setInitial= (username, userData, split_data, balance_data) => {
+    const resetData = () => {
+        data.username = "username";
+        data.totalAmount = 0;
+        data.timestamp = 0;
+        data.balance = 0;
+        data.splitData = [];
+        data.balanceEachMap = {};
+    }
+
+    const setInitial= (username, userData, split_data, balance_data, expense_data) => {
         data.username = username;
         data.totalAmount = +userData["TOTAL_AMOUNT"];
-        data.timestamp = userData["FROM_TIMESTAMP"];
-        let total_spend = 0;
-        // data.expense = userData.map(data => {
-        //     total_spend = data["IS_INCOME"] ? total_spend - (+data["AMOUNT"]) : total_spend + (+data["AMOUNT"]);
-        //     return {id: data.ID, amount: +data.AMOUNT, is_income: data["IS_INCOME"], label: data.LABEL, timestamp: data.TIMESTAMP}
-        // })
-        // console.log(data.totalAmount, total_spend);
-        // console.log(data.expense);
-        data.balance = data.totalAmount - total_spend;
+        data.timestamp = userData["TIMESTAMP"];
+        data.expenseData = expense_data;
+        const total_spend = expense_data.reduce((total, eachData) => {
+            total = eachData['IS_INCOME'] ? total + Number(eachData['AMOUNT']) : total - Number(eachData['AMOUNT']);
+            return total;
+        }, 0);
+        data.balance = data.totalAmount + total_spend;
         console.log(calculateBalanceForLabel(split_data, balance_data))
         data.splitData = calculateBalanceForLabel(split_data, balance_data);
         console.log(data.splitData)
@@ -67,7 +74,7 @@ const User = () => {
         console.log(data.splitData);
     }
 
-    return {setInitial, getData, setData, setSplitData, updateSplitData, removeSplitData }
+    return {setInitial, getData, setData, setSplitData, updateSplitData, removeSplitData, resetData }
 }
 
 export const user = User();
