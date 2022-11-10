@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles//index.css">
+    <title>Personal Expense Tracker | Home</title>
+</head>
+<body>
+    <header>
+        <h1>Spency</h1>
+        <nav>
+            <a href="./auth.html" class="login">Login/Signup</a>
+            <div class="user none">
+                <h3>Hello! <span class="user-name">cocsoulstealers</span></h3>
+                <div class="user-logout">Logout</div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="col-1">
+            <div class="income-cnt">
+                <form action="" class="user-income-form">
+                    <div class="income">
+                        <label for="income">Total Budget:</label>
+                        <div class="income-inp">
+                            <input type="number" name="income" id="income" placeholder=0 readonly>
+                            <div class="budget-logo">
+                                <img src="./assets/budget.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="edit-logo">
+                        <img class="edit-income-ic" src="./assets/edit.svg" alt="edit income button">
+                        <img class="accept-income-ic none" src="./assets/tick.svg" alt="accept income button">
+                    </div>
+                </form>
+                <div class="balance-cnt">
+                    <div class="balance">Balance: <span class="high">1000</span></div>
+                </div>
+                <div class="from-date-disp">
+                    Data From: <span></span>
+                </div>
+            </div>
+            <div class="expense">
+                <div class="expense-header">
+                    <h3 class="active header-btn btn-expense" data-class="expense-add">Add Expense</h3>
+                    <h3 class="header-btn btn-income" data-class="split-income">Split Income</h3>
+                    <h3 class="header-btn btn-alert" data-class="set-alert">Set Alert</h3>
+                </div>
+                <div class="expense-add">
+                    <form action="" class="expense-add-form">
+                        <div class="expense-amount">
+                            <label for="amount-inp">Enter Amount:</label>
+                            <input type="number" placeholder="0" id="amount-inp">
+                        </div>
+                        <div class="expense-type">
+                            <div class="type-income radio-type-expense" data-value="true"><span>Income</span>&nbsp;<img src="./assets/add.svg" alt="Add Income"></div>
+                            <div class="type-expense radio-type-expense active" data-value="false"><span>Expense</span>&nbsp;<img src="./assets/minus.svg" alt="Add Expense"></div>
+                        </div>
+                        <div class="expense-label">
+                            <label for="amount-label">Category:</label>
+                            <select name="label" id="amount-label">
+                                <option value="Food & Drinks">Food & Drinks</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Vehicle">Vehicle</option>
+                                <option value="Trip">Trip</option>
+                                <option value="General Expense">General Expense</option>
+                                <option value="Financial Expense">Financial Expense</option>
+                                <option value="Income">Income</option>
+                            </select>
+                        </div>
+                        <button class="expense-split-btn">Update</button>
+                    </form>
+                    <div class="label-suggestion">
+                        <div class="label-value active" data-value="Food-Drinks">Food & Drinks</div>
+                        <div class="label-value" data-value="Entertainment">Entertainment</div>
+                        <div class="label-value" data-value="Shopping">Shopping</div>
+                        <div class="label-value" data-value="Trip">Trip</div>
+                    </div>
+                </div>
+                <div class="split-income none">
+                    <form action="" class="split-income-form">
+                        <div class="split-type">
+                            <div for="split-by">Split By:</div>
+                            <div>
+                                <input type="radio" id="split-percent" name="split-type" value="percent" class="radio">
+                                <label for="split-percent">Percentage</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="split-amount-rad" name="split-type" class="radio" value="amount" checked>
+                                <label for="split-amount-rad">Amount</label>
+                            </div>
+                        </div>
+                        <div class="split-value-inp">
+                            <label for="split-inp">Enter Value:</label>
+                            <input type="number" placeholder="0" id="split-amount-inp">
+                        </div>
+                        <div class="split-preview">Split Value:&nbsp;<span>Rs 200.00</span></div>
+                        <div class="expense-label">
+                            <label for="split-label">Category:</label>
+                            <select name="label" id="split-label">
+                                <option value="Food & Drinks">Food & Drinks</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Vehicle">Vehicle</option>
+                                <option value="Trip">Trip</option>
+                                <option value="General Expense">General Expense</option>
+                                <option value="Financial Expense">Financial Expense</option>
+                                <option value="Income">Income</option>
+                            </select>
+                        </div>
+                        <button class="expense-split-btn">Update</button>
+                    </form>
+                    <div class="split-data-cnt">
+                        <h5>Split Data</h5>
+                        <div class="split-values">
+                            <div class="split-value">
+                                <div class="split-label">Label</div>
+                                <div class="split-amount">Amount</div>
+                                <div class="split-amount">Balance</div>
+                                <div class="split-alert">Alert</div>
+                            </div>
+                            <div class="split-value" data-id="">
+                                <div class="split-label no-overflow">Food & Drinks</div>
+                                <div class="split-amount no-overflow">800.00</div>
+                                <div class="split-balance no-overflow">400.00</div>
+                                <div class="split-alert no-overflow">2040.00</div>
+                                <div class="split-edit">
+                                    <div class="split-delete-ic"><img src="./assets/delete.svg" alt="delete-split"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="set-alert none"></div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="expense-data">
+                <h1>Past Expense</h1>
+                <div class="expense-filter">
+                    <form action="" class="expense-filter-form">
+                        <h2 >Filter:</h2>
+                        <div class="filter-inp-cnt">
+                            <div class="date-filter">
+                                <h4>By Date:</h4>
+                                <div>
+                                    <label for="from-date">From Date:</label>
+                                    <input type="date" name="from-date" id="from-date">
+                                </div>
+                               <div>
+                                 <label for="to-date">To Date:</label>
+                                 <input type="date" name="to-date" id="to-date">
+                               </div>
+                            </div>
+                            <div class="label-filter">
+                                <h4>By Category:</h4>
+                                <div class="label-fitler-cnt">
+                                    <select name="label" id="filter-label">
+                                        <option value="None">None</option>
+                                        <option value="Food & Drinks">Food & Drinks</option>
+                                        <option value="Entertainment">Entertainment</option>
+                                        <option value="Shopping">Shopping</option>
+                                        <option value="Transportation">Transportation</option>
+                                        <option value="Vehicle">Vehicle</option>
+                                        <option value="Trip">Trip</option>
+                                        <option value="General Expense">General Expense</option>
+                                        <option value="Financial Expense">Financial Expense</option>
+                                        <option value="Income">Income</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filter-update-btn-cnt">
+                                <button class="filter-update-btn">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="expense-his">
+                    <div class="expense-his-header">
+                        <h3 class="expense-header-label">Category</h3>
+                        <h3 class="expense-header-date">Date</h3>
+                        <h3 class="expense-header-amount">Amount</h3>
+                    </div>
+                    <div class="expense-his-values">
+                        <div class="expense-his-value" data-id="">
+                            <div class="expense-value-label">Entertainment</div>
+                            <div class="expense-value-date">
+                                <div class="date-date">20/11/2001</div>
+                                <div class="date-time">09:20</div>
+                            </div>
+                            <div class="expense-value-amount positive">Rs. 200</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="./js/index.js"></script>
+</body>
+</html>

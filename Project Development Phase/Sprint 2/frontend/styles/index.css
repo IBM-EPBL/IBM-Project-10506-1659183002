@@ -1,0 +1,504 @@
+header nav .user{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header nav .user > *{
+    margin: 0 .5rem;
+}
+
+header nav .user h3 span{
+    color: var(--accent);
+}
+
+header nav .user .user-logout{
+    background-color: var(--secondary-transparent);
+    color: var(--primary);
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+main{
+    margin: 1rem 0 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1rem;
+}
+
+main > div{
+    margin: 0 auto;
+}
+
+.income-cnt{
+    width: var(--box-width);
+    background-color: var(--box-bg);
+    font-size: var(--font-clamp);
+    padding: 1rem;
+}
+
+.income-cnt form{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input{
+    font-size: var(--inp-font-clamp);
+    background-color: transparent;
+    color: var(--secondary);
+    border: 0;
+    border-bottom: 2px solid;
+    padding: .2rem;
+    outline: none;
+    height: clamp(20px, 10vw, 50px);
+    width: 80%;
+}
+
+/* .income-cnt input{
+    font-size: var(--inp-font-clamp);
+    background-color: transparent;
+    color: var(--secondary);
+    border: 0;
+    border-bottom: 2px solid;
+    padding: .2rem;
+    outline: none;
+    height: 50px;
+} */
+
+.income-cnt form .income{
+    display: flex;
+    flex-direction: column;
+}
+
+.income-cnt form .income .income-inp{
+    display: flex;
+    align-items: center;
+}
+
+.income-cnt form .income .income-inp .budget-logo{
+    height: clamp(20px, 10vw, 50px);    
+    padding: .2rem;
+    border-bottom: 2px solid var(--secondary);
+}
+
+.income-cnt form .income .income-inp .budget-logo img{
+    height: 90%;
+}
+
+.income-cnt form .edit-logo{
+    cursor: pointer;
+    padding: .2rem;
+    height: clamp(20px, 10vw, 60px);
+    align-self: flex-end;
+
+}
+
+.income-cnt form .edit-logo img{
+    height: 100%;
+}
+
+.income-cnt .balance-cnt{
+    width: fit-content;
+    margin: 1rem auto .5rem auto;
+}
+
+.income-cnt .balance-cnt .balance{
+    color: var(--accent);
+    padding: 1rem;
+    background-color: var(--primary);
+    border-radius: .6rem;
+    border: 2px solid var(--secondary-transparent);
+}
+
+.income-cnt .balance-cnt .balance span.high{
+    color: var(--positive)
+}
+.income-cnt .balance-cnt .balance span.mid{
+    color: var(--accent)
+}
+.income-cnt .balance-cnt .balance span.low{
+    color: var(--negative)
+}
+
+.income-cnt .from-date-disp{
+    text-align: center;
+    border-top: 1px solid var(--secondary-transparent);
+    padding: .5rem 0;
+}
+
+.income-cnt .from-date-disp span{
+    color: var(--accent)
+}
+
+.expense{
+    font-size: var(--font-clamp);
+    width: var(--box-width);
+    height: calc(100vh - 400px);
+    margin: 2rem 0;
+    background-color: var(--box-bg);
+    overflow: auto;
+}
+
+.expense .expense-header{
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--accent);
+    font-size: 1.3rem;
+}
+
+.expense .expense-header h3{
+    width: 50%;
+    text-align: center;
+    padding: .5rem 0;
+    cursor: pointer;
+}
+
+.expense .expense-header h3:hover{
+    background-color: var(--primary);
+}
+
+.expense .expense-header h3.active{
+    background-color: var(--secondary-transparent);
+    color: var(--primary);
+}
+
+.expense .expense-header h3:first-child{
+    border-right: 1px solid var(--accent);
+}
+.expense .expense-header h3:last-child{
+    border-left: 1px solid var(--accent);
+}
+
+.expense-add, .split-income {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.expense-add .expense-amount{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+}
+
+.expense-add .expense-amount input{
+    width: 100%;
+}
+
+.expense-add .expense-type{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.expense-add .expense-type div{
+    display: flex;
+    align-items: center;
+    padding: .3rem 1.5rem;
+    margin: 1rem .5rem;
+    cursor: pointer;
+    border: 5px solid transparent;
+    border-radius: .5rem;
+}
+
+.expense-add .expense-type div:hover{
+    background-color: var(--accent);
+}
+
+.expense-add .expense-type div.active{
+    color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.expense-add .expense-type .type-income{
+    background-color: var(--positive);
+    color: var(--primary);
+}
+.expense-add .expense-type .type-expense{
+    background-color: var(--negative);
+}
+
+.expense-label{
+    margin: 2rem 0;
+}
+
+.expense-label #amount-label, #split-label, #filter-label{
+    font-size: var(--inp-font-clamp);
+    background-color: transparent;
+    color: var(--accent);
+    outline: none;
+    border: none;
+    border-bottom: 2px solid var(--secondary);
+}
+
+.expense-add .label-suggestion{
+    width: 90%;
+    border-top: 1px solid var(--secondary-transparent);
+    padding: 1rem .5rem;
+}
+
+.expense-add .label-suggestion{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.expense-add .label-suggestion div{
+    padding: .5rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.expense-add .label-suggestion div:hover{
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.expense-add .label-suggestion div.active{
+    background-color: var(--secondary-transparent);
+    color: var(--primary);
+}
+
+.expense .split-income{
+    padding: 0 1rem 1rem 1rem;
+}
+
+.expense .split-income form > div{
+    margin: 1.5rem 0;
+}
+
+.expense .split-income form div{
+    display: flex;
+    align-items: center;
+}
+
+.expense .split-income form input.radio{
+    margin: 0 1rem;
+    height: unset;
+}
+
+.expense .split-data-cnt{
+    margin-top: .5rem;
+    padding: .5rem;
+    width: 100%;
+    border-top: 1px solid var(--secondary-transparent);
+}
+
+.split-preview span{
+    color: var(--accent);
+}
+
+.split-data-cnt h5{
+    margin: 0 0 1rem 0;
+}
+
+.split-values{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: .5rem 0;
+}
+
+.split-value{
+    font-size: 1.4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    position: relative;
+    overflow: hidden;
+}
+
+.split-value:first-child{
+    border-bottom: .5px solid var(--secondary-transparent);
+}
+
+.split-value:not(:first-child){
+    background-color: var(--primary);
+    padding: .2rem;
+}
+
+.no-overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.split-value .split-edit{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: none;
+}
+
+.split-value:hover .split-edit{
+    display: flex;
+}
+
+.split-edit div{
+    background-color: var(--primary);
+    cursor: pointer;
+}
+
+.split-value .split-edit .split-edit-ic img{
+    width: 30px;
+    height: 30px;
+}
+.split-value .split-edit .split-delete-ic img{
+    width: 40px;
+    height: 40px;
+}
+
+.expense-split-btn, .filter-update-btn{
+    padding: .5rem 1.5rem;
+    font-size: 1.2rem;
+    margin-bottom: .5rem;
+    cursor: pointer;
+    background-color: var(--primary);
+    color: var(--secondary);
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    width: 100%
+}
+
+.expense-split-btn:hover{
+    background-color: var(--box-bg);
+    border-color: var(--secondary-transparent);
+}
+
+.col-2{
+    width: 100%;
+    height: calc(100vh - 150px);
+}
+
+.expense-data{
+    background-color: var(--box-bg);
+    padding: .5rem;
+    width: 80%;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+    position: relative;
+    margin: 0 auto;
+}
+
+.expense-data h1{
+    margin: .5rem 0;
+    text-align: center;
+    align-self: center;
+    font-size: 1.6rem;
+    color: var(--accent);
+}
+
+.expense-filter{
+    border-top: 1px solid var(--secondary-transparent);
+    border-bottom: 1px solid var(--secondary-transparent);
+    display: flex;
+    background-color: var(--primary);
+    flex-direction: column;
+    padding: .5rem 1rem;
+}
+
+.expense-filter h2{
+    font-size: 1.3rem;
+}
+
+.expense-filter .date-filter{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    font-size: 1rem;
+}
+
+.filter-update-btn-cnt{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-update-btn{
+    width: unset;
+    background-color: var(--secondary-transparent);
+    color: var(--primary);
+    width: 40%;
+    padding: 0.2rem;
+    margin: 1rem 0;
+    font-size: 1rem;
+    border: 1px solid transparent\;
+}
+
+.filter-update-btn:hover{
+    background-color: var(--box-bg);
+    color: var(--secondary);
+    border-color: var(--accent);
+}
+
+
+.date-filter > div{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.expense-filter input{
+    color: var(--accent);
+    border-color: var(--secondary);
+    font-size: 1.2rem;
+}
+
+.expense-filter .label-filter{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.expense-his{
+    margin: 1rem 0;
+    
+}
+
+.expense-his-header, .expense-his-value{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 0 .5rem 0;
+    border-bottom: 1px solid var(--secondary-transparent);
+    gap: 1rem;
+    margin: 0 2rem;
+}
+
+.expense-his-header > h3, .expense-his-value > div{
+    margin: 0 auto;
+}
+
+.expense-his-header{
+    color: var(--accent);
+}
+
+.expense-his-value{
+    padding: .5rem 0;
+}
+
+.expense-his-value > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
