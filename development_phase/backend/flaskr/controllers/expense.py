@@ -34,3 +34,17 @@ class Expense(Resource):
             return {"message": "Error Occured"}, 400
         
         return {"message": "Successful"}, 200
+
+class ExpenseFilter(Resource):
+    @token_required
+    def post(payload, self):
+        user_date = request.json
+        print(user_date)
+        sql_query = "SELECT * FROM expense WHERE user_id = ? AND timestamp BETWEEN ? AND ?"
+        params = (payload["id"], user_date["fromTimestamp"], user_date["toTimestamp"])
+        expense_data = db.run_sql_select(sql_query, params=params)
+
+        if(not expense_data):
+            return {"message": "Error Occured"}, 400
+        
+        return {"expense_data": expense_data}, 200

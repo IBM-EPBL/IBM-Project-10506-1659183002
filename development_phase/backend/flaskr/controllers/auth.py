@@ -72,14 +72,18 @@ class Login(Resource):
         print(payload)
         sql_query_user = "SELECT total_amount, timestamp FROM user WHERE id=?"
         sql_query_split = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label ORDER BY LABEL"
-        sql_balance = "select label, sum(case when is_income = true then amount else -amount end) as balance from expense group by label"
         params = (payload["id"],)
+
         user_data = db.run_sql_select(sql_query_user, params)
         split_data = db.run_sql_select(sql_query_split, params)
-        balance_data = db.run_sql_select(sql_balance, params)
+
         sql_query_expense = "SELECT id, amount, is_income, label, timestamp FROM expense WHERE user_id = ? AND timestamp >= ?"
+        sql_balance = "select label, sum(case when is_income = true then amount else -amount end) as balance from expense where user_id = ? AND timestamp >= ? group by label"
         params = (payload["id"], user_data[0]["TIMESTAMP"])
+        
+        balance_data = db.run_sql_select(sql_balance, params)
         expense_data = db.run_sql_select(sql_query_expense, params)
+        
         return {"message": "User Logged In", "user_data": user_data[0], "split_data":split_data, "balance_data": balance_data, "expense_data":expense_data, "email": payload['email']}, 200
 
     def post(self):   

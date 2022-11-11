@@ -24,13 +24,15 @@ class Income(Resource):
 
 class SplitIncome(Resource):
     @token_required
-    def get(payload, self):
-        sql_query = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label ORDER BY LABEL"
-        sql_balance = "select label, sum(case when is_income = true then amount else -amount end) as balance from expense group by label"
-        params = (payload["id"],)
-        split_data = db.run_sql_select(sql_query, params)
+    def get(payload, self, id):
+        timestamp = id
+        # sql_query = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label ORDER BY LABEL"
+        sql_balance = "select label, sum(case when is_income = true then amount else -amount end) as balance from expense where user_id = ? AND timestamp >= ? group by label"
+        params = (payload["id"])
+        # split_data = db.run_sql_select(sql_query, params)
+        params = (payload["id"], timestamp)
         balance_data = db.run_sql_select(sql_balance, params)
-        return {"split_data": split_data, "balance_data": balance_data}, 200
+        return {"balance_data": balance_data}, 200
     
     @token_required
     def post(payload, self):
