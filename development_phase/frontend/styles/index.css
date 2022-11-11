@@ -364,7 +364,7 @@ input{
     height: 40px;
 }
 
-.expense-split-btn, .filter-update-btn{
+.expense-split-btn, .filter-update-btn, .filter-reset-btn{
     padding: .5rem 1.5rem;
     font-size: 1.2rem;
     margin-bottom: .5rem;
@@ -434,18 +434,18 @@ input{
     justify-content: center;
 }
 
-.filter-update-btn{
+.filter-update-btn, .filter-reset-btn{
     width: unset;
     background-color: var(--secondary-transparent);
     color: var(--primary);
     width: 40%;
     padding: 0.2rem;
-    margin: 1rem 0;
+    margin: 1rem;
     font-size: 1rem;
     border: 1px solid transparent\;
 }
 
-.filter-update-btn:hover{
+.filter-update-btn:hover, .filter-reset-btn:hover{
     background-color: var(--box-bg);
     color: var(--secondary);
     border-color: var(--accent);

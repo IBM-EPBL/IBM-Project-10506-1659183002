@@ -21,26 +21,28 @@ const User = () => {
             return total;
         }, 0);
         data.balance = data.totalAmount + total_spend;
-        console.log(calculateBalanceForLabel(split_data, balance_data))
+        //console.log(calculateBalanceForLabel(split_data, balance_data))
         data.splitData = calculateBalanceForLabel(split_data, balance_data);
-        console.log(data.splitData)
+        //console.log(data.splitData)
     }
 
     const calculateBalanceForLabel = (split_data, balance_data=false) => {
-        console.log(data.balanceEachMap, balance_data)
+        //console.log(data.balanceEachMap, balance_data)
         if(balance_data){
             balance_data.forEach(bal_data => {
-                console.log(data.balanceEachMap);
+                //console.log(data.balanceEachMap);
                 data.balanceEachMap[bal_data['LABEL']] = +bal_data['BALANCE']
             })
         }
-        console.log(data.balanceEachMap);
+        //console.log(data.balanceEachMap);
         return split_data.map((each_data) => {
-            // console.log(data, data.balanceEachMap[data['LABEL']] ? data.balanceEachMap[data['LABEL']] : 0)
-            let balance = 0;
-            console.log(Object.keys(data.balanceEachMap))
+            //console.log(data, data.balanceEachMap[data['LABEL']] ? data.balanceEachMap[data['LABEL']] : 0)
+            let balance = Number(each_data['AMOUNT']);
+            //console.log(Object.keys(data.balanceEachMap))
             if (Object.keys(data.balanceEachMap).length !== 0){
+                balance = 0;
                 const spentAmout = data.balanceEachMap[each_data['LABEL']] ? data.balanceEachMap[each_data['LABEL']] : 0;
+                //console.log(spentAmout);
                 const totalAmount = Number(each_data['AMOUNT']);
                 balance = totalAmount + spentAmout;
             }
@@ -71,10 +73,22 @@ const User = () => {
     }
     const removeSplitData = (deleteDataLabel) => {
         data.splitData = data.splitData.filter(sp_data => sp_data['LABEL'] !== deleteDataLabel);
-        console.log(data.splitData);
+        //console.log(data.splitData);
     }
 
-    return {setInitial, getData, setData, setSplitData, updateSplitData, removeSplitData, resetData }
+    const updateUserExpenseData = (expenseData) => {
+        const newData = {
+            LABEL: expenseData.label,
+            AMOUNT: expenseData.amount,
+            IS_INCOME: expenseData.is_income,
+            TIMESTAMP: expenseData.timestamp
+        }
+        data.expenseData.push(newData);
+        data.balance += expenseData.is_income ? expenseData.amount : -expenseData.amount;
+
+    }
+
+    return {setInitial, getData, setData, setSplitData, updateSplitData, removeSplitData, updateUserExpenseData, resetData }
 }
 
 export const user = User();

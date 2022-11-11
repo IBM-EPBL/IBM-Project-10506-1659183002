@@ -1,5 +1,5 @@
 import { endpoint } from "./endpoint.js";
-import { fetchSplitIncome } from "./income.js";
+import { fetchSplitIncome, updateBalance } from "./income.js";
 import { expense_data_template } from "./template.js";
 import { user } from "./user_data.js";
 
@@ -48,20 +48,92 @@ const addExpense = async (e) => {
     });
     if(res.status === 200){
         amountInp.value = "";
+        user.updateUserExpenseData(data);
+        updateExpenseData(user.getData('expenseData'));
+        updateBalance();
         fetchSplitIncome();
     }
 }
 
-export const updateExpenseDate = () => {
+export const updateExpenseData = (expenseData) => {
     const expenseValuesCnt = document.querySelector(".expense-his-values");
     const expenseValueCnt = document.querySelectorAll(".expense-his-value");
     expenseValueCnt.forEach(child => {
         expenseValuesCnt.removeChild(child);
     })
-    user.getData('expenseData').forEach(eachData => {
+    expenseData.forEach(eachData => {
         const valueDiv = expense_data_template(eachData);
         expenseValuesCnt.appendChild(valueDiv)
     })
+}
+
+// Filter expense
+const fromDateInp = document.querySelector("#from-date");
+const toDateInp = document.querySelector("#to-date");
+const filterLabelInp = document.querySelector("#filter-label");
+const updateBtn = document.querySelector('.filter-update-btn');
+const resetBtn = document.querySelector('.filter-reset-btn');
+let filterData = []
+const getTimestampFromDate = (dateStr) => {
+    const datePart = dateStr.split('-');
+    const date = new Date(datePart[0], datePart[1]-1, datePart[2]);
+    return date.getTime();
+}
+
+let prevToTimestamp = 0, currToTimestamp = 0, prevFromTimestamp = 0, currFromTimestamp = 0; 
+
+const setDate = (is_toDate, e) => {
+    const dateStr = e.target.value;
+    is_toDate ? 
+        (currToTimestamp = getTimestampFromDate(dateStr) + (60 * 60 * 24 * 1000) - 1000) :
+        (currFromTimestamp = getTimestampFromDate(dateStr))
+}
+
+const filterExpenseLabel = () => {
+    const label = filterLabelInp.value;
+    const toUpdateData = filterData.length === 0 ? user.getData('expenseData') : filterData;
+    if(label === "None"){
+        updateExpenseData(toUpdateData);
+        return;
+    }
+    const newFilterData = toUpdateData.filter(eachData => eachData["LABEL"] === label)
+    updateExpenseData(newFilterData)
+}
+
+const getFilterExpense = async (e) => {
+    e.preventDefault();
+    if((currToTimestamp == 0 || currFromTimestamp == 0) || currFromTimestamp >= currToTimestamp || (currToTimestamp == prevToTimestamp && currFromTimestamp == prevFromTimestamp) ){
+        filterExpenseLabel(user.getData('expenseData'))
+        console.log('return');
+        return;
+    }
+    const bodyData = {
+        fromTimestamp: currFromTimestamp,
+        toTimestamp: currToTimestamp
+    }
+    const res = await fetch(endpoint.expense_filter, {
+        method:"POST",
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bodyData)
+    });
+    if(res.status === 200){
+        const resData = await res.json();
+        filterData = resData["expense_data"]
+        filterExpenseLabel()
+        prevFromTimestamp = currFromTimestamp;
+        prevToTimestamp =currToTimestamp;
+    }
+}
+
+const resetFilter = (e) => {
+    e.preventDefault();
+    toDateInp.value = fromDateInp.value = "";
+    filterLabelInp.value = "None";
+    filterData = []
+    filterExpenseLabel();
 }
 
 export const loadExpenseFunction = () => {
@@ -71,4 +143,8 @@ export const loadExpenseFunction = () => {
         btn.addEventListener("click", updateIsIncome)
     });
     expenseForm.addEventListener("submit", addExpense);
+    fromDateInp.addEventListener("change", setDate.bind(null, false));
+    toDateInp.addEventListener("change", setDate.bind(null, true));
+    updateBtn.addEventListener("click", getFilterExpense);
+    resetBtn.addEventListener("click", resetFilter);
 }

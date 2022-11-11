@@ -45,9 +45,9 @@ const updateIncome = async (amount) => {
     }
 }
 
-export const updateBalance = (amount) => {
+export const updateBalance = () => {
     const balanceEle = document.querySelector(".balance span");
-    balanceEle.innerText = amount;
+    balanceEle.innerText = user.getData('balance');
 }
 
 export const updateSplitData = () => {
@@ -134,7 +134,7 @@ const addSplitIncome = async (e) => {
 }
 
 export const fetchSplitIncome = async () => {
-    const res = await fetch(endpoint.split_income, {
+    const res = await fetch(endpoint.get_split_income(user.getData('timestamp')), {
         method:"GET",
         credentials: 'include',
     });
@@ -142,7 +142,7 @@ export const fetchSplitIncome = async () => {
     console.log(resData)
     if(res.status === 200){
         // user.setSplitData(resData["data"]);
-        user.setSplitData(resData['split_data'], resData['balance_data']);
+        user.setSplitData(user.getData('splitData'), resData['balance_data']);
         updateSplitData();
     }
 }
