@@ -83,7 +83,7 @@ const User = () => {
             IS_INCOME: expenseData.is_income,
             TIMESTAMP: expenseData.timestamp
         }
-        data.expenseData.push(newData);
+        data.expenseData.unshift(newData);
         data.balance += expenseData.is_income ? expenseData.amount : -expenseData.amount;
 
     }

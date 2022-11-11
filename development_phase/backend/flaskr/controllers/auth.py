@@ -77,7 +77,7 @@ class Login(Resource):
         user_data = db.run_sql_select(sql_query_user, params)
         split_data = db.run_sql_select(sql_query_split, params)
 
-        sql_query_expense = "SELECT id, amount, is_income, label, timestamp FROM expense WHERE user_id = ? AND timestamp >= ?"
+        sql_query_expense = "SELECT id, amount, is_income, label, timestamp FROM expense WHERE user_id = ? AND timestamp >= ? order by timestamp desc"
         sql_balance = "select label, sum(case when is_income = true then amount else -amount end) as balance from expense where user_id = ? AND timestamp >= ? group by label"
         params = (payload["id"], user_data[0]["TIMESTAMP"])
         

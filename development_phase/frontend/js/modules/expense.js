@@ -49,7 +49,10 @@ const addExpense = async (e) => {
     if(res.status === 200){
         amountInp.value = "";
         user.updateUserExpenseData(data);
-        updateExpenseData(user.getData('expenseData'));
+        if(isFilterPresent === false){
+            console.log('in', filterData)
+            updateExpenseData(user.getData('expenseData'));
+        }
         updateBalance();
         fetchSplitIncome();
     }
@@ -61,6 +64,11 @@ export const updateExpenseData = (expenseData) => {
     expenseValueCnt.forEach(child => {
         expenseValuesCnt.removeChild(child);
     })
+    if(expenseData.length === 0){
+        document.querySelector(".expense-msg").classList.remove("none");
+        return;
+    }
+    document.querySelector(".expense-msg").classList.add("none");
     expenseData.forEach(eachData => {
         const valueDiv = expense_data_template(eachData);
         expenseValuesCnt.appendChild(valueDiv)
@@ -73,7 +81,7 @@ const toDateInp = document.querySelector("#to-date");
 const filterLabelInp = document.querySelector("#filter-label");
 const updateBtn = document.querySelector('.filter-update-btn');
 const resetBtn = document.querySelector('.filter-reset-btn');
-let filterData = []
+let filterData = false, isFilterPresent = false;
 const getTimestampFromDate = (dateStr) => {
     const datePart = dateStr.split('-');
     const date = new Date(datePart[0], datePart[1]-1, datePart[2]);
@@ -91,22 +99,25 @@ const setDate = (is_toDate, e) => {
 
 const filterExpenseLabel = () => {
     const label = filterLabelInp.value;
-    const toUpdateData = filterData.length === 0 ? user.getData('expenseData') : filterData;
+    isFilterPresent = filterData === false ? false : true;
+    const toUpdateData = filterData === false ? user.getData('expenseData') : filterData;
     if(label === "None"){
         updateExpenseData(toUpdateData);
         return;
     }
+    isFilterPresent = true;
     const newFilterData = toUpdateData.filter(eachData => eachData["LABEL"] === label)
     updateExpenseData(newFilterData)
 }
 
+let isFilterProcessing = false;
 const getFilterExpense = async (e) => {
     e.preventDefault();
-    if((currToTimestamp == 0 || currFromTimestamp == 0) || currFromTimestamp >= currToTimestamp || (currToTimestamp == prevToTimestamp && currFromTimestamp == prevFromTimestamp) ){
-        filterExpenseLabel(user.getData('expenseData'))
-        console.log('return');
+    if(isFilterProcessing || (currToTimestamp == 0 || currFromTimestamp == 0) || currFromTimestamp >= currToTimestamp || (currToTimestamp == prevToTimestamp && currFromTimestamp == prevFromTimestamp) ){
+        filterExpenseLabel(user.getData('expenseData'));
         return;
     }
+    isFilterProcessing = true;
     const bodyData = {
         fromTimestamp: currFromTimestamp,
         toTimestamp: currToTimestamp
@@ -122,17 +133,20 @@ const getFilterExpense = async (e) => {
     if(res.status === 200){
         const resData = await res.json();
         filterData = resData["expense_data"]
+        console.log(filterData)
         filterExpenseLabel()
         prevFromTimestamp = currFromTimestamp;
         prevToTimestamp =currToTimestamp;
+        isFilterProcessing = false;
     }
 }
 
 const resetFilter = (e) => {
     e.preventDefault();
+    isFilterPresent = false;
     toDateInp.value = fromDateInp.value = "";
     filterLabelInp.value = "None";
-    filterData = []
+    filterData = false;
     filterExpenseLabel();
 }
 
