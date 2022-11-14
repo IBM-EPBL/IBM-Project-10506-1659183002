@@ -1,6 +1,5 @@
 from flask import request
 from flask_restful import Resource
-import ibm_db
 from ..utils import validate, general, db
 from ..utils.general import token_required
 

@@ -70,7 +70,7 @@ class Login(Resource):
     @token_required
     def get(payload, self):
         print(payload)
-        sql_query_user = "SELECT total_amount, timestamp FROM user WHERE id=?"
+        sql_query_user = "SELECT total_amount, alert, is_send, timestamp FROM user WHERE id=?"
         sql_query_split = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label ORDER BY LABEL"
         params = (payload["id"],)
 

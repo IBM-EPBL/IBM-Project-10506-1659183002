@@ -27,6 +27,10 @@ def create_app(test_config=None):
     api.add_resource(Expense, '/api/add/expense', '/api/delete/expense/<int:id>')
     api.add_resource(ExpenseFilter, '/api/filter/expense')
 
+    #Endpoint: Alert
+    from .controllers.alert import Alert
+    api.add_resource(Alert, '/api/alert')
+
     @app.route('/hello')
     def hello():
         return 'Hello, World'

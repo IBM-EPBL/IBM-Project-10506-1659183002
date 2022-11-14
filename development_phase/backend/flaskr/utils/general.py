@@ -90,12 +90,16 @@ def send_confirmation_token(email):
     token = generate_confirmation_token(email)    
     
     confirm_url =f"{getenv('BASE_URL')}/confirm.html?token={token}"
-    confirm_html = f"<p>Welcome! Thanks for signing up. Please follow this link to activate your account:</p><p><a href={confirm_url}>{confirm_url}</a></p><br><h4>Happy Spending</h4>"
+    data = {
+        "confirm_url": confirm_url
+    }
+    confirm_html = f"<h1>Welcome!!</h1><h2>Confirmation Mail from Spency</h2><p>Thanks! for signing up. Please follow this link to activate your account:</p><p><a href={confirm_url}>{confirm_url}</a></p><br><h4>Happy Spending</h4>"
 
     to_email = email
     subject = "Confirm E-Mail from Spency"
     content_type = "text/html"
     content = confirm_html
-    res = send_mail(to_email, subject, content_type, content)
+    templateID = "d-51f0da2f2e9d444b814adb52a463e960"
+    res = send_mail(to_email, data, templateID)
 
     return res

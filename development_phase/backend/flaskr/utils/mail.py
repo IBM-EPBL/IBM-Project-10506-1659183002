@@ -1,19 +1,27 @@
-from sendgrid.helpers.mail import *
+from sendgrid.helpers.mail import Mail
 from ..config.mail_config import get_mail_config
 from os import getenv
 
-def send_mail(email, mail_subject, mail_content_type, mail_content):
-    try:
-        sg = get_mail_config()
+def send_mail(email, data, templateID):
+    # try:
+    print(email, data, templateID)
+    sg = get_mail_config()
 
-        from_email = Email(getenv("FROM_MAIL"))
-        to_email = To(email)
-        subject = mail_subject
-        content = Content(mail_content_type, mail_content)
-        mail = Mail(from_email, to_email, subject, content)
+    FROM_EMAIL = getenv("FROM_MAIL")
+    TO_EMAIL = [(email, 'User')]
+    message = Mail(
+        from_email=FROM_EMAIL,
+        to_emails=TO_EMAIL)
+    message.dynamic_template_data = data
+    message.template_id = templateID
 
-        sg.client.mail.send.post(request_body=mail.get())
-        return True
+    response = sg.send(message)
+    code, body, headers = response.status_code, response.body, response.headers
+    print(f"Response code: {code}")
+    print(f"Response headers: {headers}")
+    print(f"Response body: {body}")
+    print("Dynamic Messages Sent!")
+    return True
     
-    except:
-        return False
+    # except:
+    #     return False
