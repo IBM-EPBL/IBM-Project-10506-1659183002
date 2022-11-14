@@ -21,7 +21,7 @@ header nav .user .user-logout{
 }
 
 main{
-    margin: 1rem 0 0 0;
+    margin: 1rem 0 2rem 0;
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 1rem;
@@ -183,7 +183,7 @@ input{
     border-left: 1px solid var(--accent);
 }
 
-.expense-add, .split-income {
+.expense-add, .split-income, .set-alert {
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -364,7 +364,7 @@ input{
     height: 40px;
 }
 
-.expense-split-btn, .filter-update-btn, .filter-reset-btn{
+.expense-split-btn, .filter-update-btn, .filter-reset-btn, .update-alert-btn{
     padding: .5rem 1.5rem;
     font-size: 1.2rem;
     margin-bottom: .5rem;
@@ -376,9 +376,27 @@ input{
     width: 100%
 }
 
-.expense-split-btn:hover{
+.expense-split-btn:hover, .update-alert-btn:hover{
     background-color: var(--box-bg);
     border-color: var(--secondary-transparent);
+}
+
+.set-alert form .alert-amount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.next-alert {
+    text-align: center;
+}
+
+.next-alert span{
+    color: var(--accent);
+}
+
+.update-alert-btn{
+    margin: 1rem 0;
 }
 
 .col-2{
@@ -508,4 +526,40 @@ input{
     left: 50%;
     font-size: 1.3rem;
     transform: translate(-50%, -50%);
+}
+
+.chart-cnt{
+    margin: 1rem auto 2rem auto;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 755px;
+}
+
+.chart-cnt h1{
+    text-align: center;
+    margin: .5rem 0;
+}
+
+.loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading svg{
+    margin: 1rem 0;
+    animation: loading_animation 1.5s ease infinite;
+}
+
+@keyframes loading_animation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

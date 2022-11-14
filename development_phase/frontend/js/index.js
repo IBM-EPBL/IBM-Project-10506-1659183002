@@ -1,3 +1,5 @@
+import { loadChart } from "./chart.js";
+import { loadAlertFunction } from "./modules/alert.js";
 import { endpoint } from "./modules/endpoint.js";
 import { loadExpenseFunction } from "./modules/expense.js";
 import { loadIncomeFunction } from "./modules/income.js";
@@ -26,7 +28,7 @@ const logoutUser= async () => {
         credentials: 'include'
     })
     if(res.status === 200){
-        toggleUserLogged(false, '')
+        toggleUserLogged(false, '');
     }
 }
 
@@ -43,6 +45,7 @@ const isUserLoggedIn = async () => {
 const toggleUserLogged = (isLoggedIn, username, userData, incomeData, balance_data, expense_data) => {
     const navLogin = document.querySelector(".login");
     const navUser = document.querySelector(".user");
+    const main = document.querySelector("main");
     if(isLoggedIn){
         navLogin.classList.add("none");
         navUser.classList.remove("none");
@@ -56,8 +59,11 @@ const toggleUserLogged = (isLoggedIn, username, userData, incomeData, balance_da
         navUser.classList.add("none");
         navUser.querySelector(".user-name").innerText = '';
         user.resetData();
+        main.classList.add("none");
     }
 }
+const nav = document.querySelector("nav");
+const loading = document.querySelector(".loading");
 
 window.addEventListener("load", async () => {
     const res = await isUserLoggedIn();
@@ -68,5 +74,12 @@ window.addEventListener("load", async () => {
         loadData();
         loadExpenseFunction();
         loadIncomeFunction();
+        loadAlertFunction();
+        loadChart()
+    }
+    else{
+        nav.classList.remove("none");
+        loading.classList.add("none");
+        console.log('hi')
     }
 });

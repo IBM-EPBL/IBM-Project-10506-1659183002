@@ -7,6 +7,8 @@ const User = () => {
         data.totalAmount = 0;
         data.timestamp = 0;
         data.balance = 0;
+        data.alert = 0;
+        data.is_send = false;
         data.splitData = [];
         data.balanceEachMap = {};
     }
@@ -14,6 +16,8 @@ const User = () => {
     const setInitial= (username, userData, split_data, balance_data, expense_data) => {
         data.username = username;
         data.totalAmount = +userData["TOTAL_AMOUNT"];
+        data.alert = +userData["ALERT"];
+        data.is_send = userData["IS_SEND"];
         data.timestamp = userData["TIMESTAMP"];
         data.expenseData = expense_data;
         const total_spend = expense_data.reduce((total, eachData) => {

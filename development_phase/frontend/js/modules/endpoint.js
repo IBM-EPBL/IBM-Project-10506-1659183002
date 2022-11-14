@@ -10,4 +10,5 @@ export const endpoint = {
     "add_expense": `${baseURL}/api/add/expense`,
     "delete_expense" : (id) => `${baseURL}/api/delete/expense/${id}`,
     "expense_filter": `${baseURL}/api/filter/expense`,
+    "alert": `${baseURL}/api/alert`
 }

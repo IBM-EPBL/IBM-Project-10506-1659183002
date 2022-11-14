@@ -1,3 +1,5 @@
+import { loadChart } from "../chart.js";
+import { send_usage_alert } from "./alert.js";
 import { endpoint } from "./endpoint.js";
 import { fetchSplitIncome, updateBalance } from "./income.js";
 import { expense_data_template } from "./template.js";
@@ -55,6 +57,8 @@ const addExpense = async (e) => {
         }
         updateBalance();
         fetchSplitIncome();
+        send_usage_alert();
+        loadChart();
     }
 }
 
