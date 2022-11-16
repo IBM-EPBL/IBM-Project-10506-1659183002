@@ -1,8 +1,4 @@
-const endpoint = {
-    "register": "http://localhost:5000/api/auth/register",
-    "login": "http://localhost:5000/api/auth/login",
-    "resendMail": "http://localhost:5000/api/auth/verify"
-}
+import { endpoint } from "./modules/endpoint.js";
 
 const loginSubmit = document.querySelector(".login-submit");
 const signupSubmit = document.querySelector(".signup-submit");
