@@ -6,8 +6,10 @@ from flask_restful import Api, reqparse
 parser = reqparse.RequestParser()
 
 def create_app(test_config=None):
+    from flask_talisman import Talisman
     app = Flask(__name__, instance_relative_config=True)
     api = Api(app)
+    Talisman(app, content_security_policy=None)
     CORS(app)
     
     # Endpoint: Authentication
