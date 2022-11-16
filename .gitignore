@@ -15,3 +15,7 @@ build/
 
 .env
 DigiCertGlobalRootCA.crt
+ssl
+
+Dockerfile
+kube_deployment.yaml
