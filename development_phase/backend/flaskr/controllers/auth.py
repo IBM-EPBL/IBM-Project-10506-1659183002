@@ -61,7 +61,7 @@ class EmailVerification(Resource):
 
         @after_this_request
         def set_cookie(response):
-            response.set_cookie('auth_token', value=token, path="/", secure="None", samesite="None", httponly=True)
+            response.set_cookie('auth_token', value=token, path="/", secure="True", samesite="None", httponly=True)
             return response
         
         return {"message": "User Verified"}, 200

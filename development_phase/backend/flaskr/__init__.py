@@ -39,7 +39,7 @@ def create_app(test_config=None):
 
     @app.after_request
     def after_request(res):
-        res.headers['Access-Control-Allow-Origin'] = 'http://localhost:5500'
+        res.headers['Access-Control-Allow-Origin'] = 'https://spency.onrender.com'
         res.headers['Access-Control-Allow-Headers'] = 'Content-Type'
         res.headers['Access-Control-Expose-Headers'] = 'true'
         res.headers['Access-Control-Allow-Credentials'] = 'true'
