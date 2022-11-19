@@ -1,7 +1,6 @@
 from flask import request
 from flask_restful import Resource
-import ibm_db
-from ..utils import validate, general, db
+from ..utils import validate, db
 from ..utils.general import token_required
 
 class Income(Resource):
@@ -26,10 +25,8 @@ class SplitIncome(Resource):
     @token_required
     def get(payload, self, id):
         timestamp = id
-        # sql_query = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label ORDER BY LABEL"
         sql_balance = "select label, sum(case when is_income = true then amount else -amount end) as balance from expense where user_id = ? AND timestamp >= ? group by label"
         params = (payload["id"])
-        # split_data = db.run_sql_select(sql_query, params)
         params = (payload["id"], timestamp)
         balance_data = db.run_sql_select(sql_balance, params)
         return {"balance_data": balance_data}, 200
@@ -37,7 +34,6 @@ class SplitIncome(Resource):
     @token_required
     def post(payload, self):
         user_data = request.json
-        print(user_data)
         validate_result = validate.validate_split_income(user_data=user_data)
 
         if(validate_result):

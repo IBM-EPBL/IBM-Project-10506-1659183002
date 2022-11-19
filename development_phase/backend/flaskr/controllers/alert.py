@@ -1,6 +1,6 @@
 from flask import request
 from flask_restful import Resource
-from ..utils import validate, general, db
+from ..utils import db
 from ..utils.general import token_required
 from ..utils.mail import send_mail
 
@@ -17,7 +17,6 @@ class Alert(Resource):
         }
         templateID = "d-24f02e45da0b4852a23550a0ab1a2478"
         res = send_mail(payload["email"], data, templateID)
-        print(res)
         if(not res):
             return {"message": "Error Occured"}, 400
         sql_update_query = "UPDATE user SET is_send=? where id=?"
@@ -40,15 +39,3 @@ class Alert(Resource):
             return {"message": "Error Occured"}, 400
         
         return {"message": "Successful"}, 200
-
-
-
-"""
-{
-    "total_amount": 5000,
-    "pending_amount": 100,
-    "percentage": 98,
-    "date": "10/10/2001",
-    "next_date":"10/10/2001"
-}
-"""

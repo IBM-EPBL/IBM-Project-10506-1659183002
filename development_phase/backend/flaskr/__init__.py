@@ -6,10 +6,8 @@ from flask_restful import Api, reqparse
 parser = reqparse.RequestParser()
 
 def create_app(test_config=None):
-    from flask_talisman import Talisman
     app = Flask(__name__, instance_relative_config=True)
     api = Api(app)
-    Talisman(app, content_security_policy=None)
     CORS(app)
     
     # Endpoint: Authentication
@@ -33,15 +31,15 @@ def create_app(test_config=None):
     from .controllers.alert import Alert
     api.add_resource(Alert, '/api/alert')
 
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World'
+    @app.route('/')
+    def index():
+        return 'Please visit frontend Spency'
 
     @app.after_request
     def after_request(res):
-        res.headers['Access-Control-Allow-Origin'] = 'https://spency.onrender.com'
-        res.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        res.headers['Access-Control-Expose-Headers'] = 'true'
+    #     res.headers['Access-Control-Allow-Origin'] = 'http://169.51.194.117:31320'
+    #     res.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    #     res.headers['Access-Control-Expose-Headers'] = 'true'
         res.headers['Access-Control-Allow-Credentials'] = 'true'
         return res
         

@@ -1,17 +1,14 @@
 from flask import request
 from flask_restful import Resource
-from ..utils import validate, general, db
+from ..utils import validate, db
 from ..utils.general import token_required
 
 class Expense(Resource):
     @token_required
     def post(payload, self):
         user_data = request.json
-        print(request.json)
         validate_result = validate.validate_add_expense(user_data=user_data)
-        print(validate_result)
         if(validate_result):
-            print('exp')
             return validate_result["error"]
             
         sql_query = "INSERT INTO expense (user_id, amount, is_income, label, timestamp) values(?, ?, ?, ?, ?)"
@@ -38,7 +35,6 @@ class ExpenseFilter(Resource):
     @token_required
     def post(payload, self):
         user_date = request.json
-        print(user_date)
         sql_query = "SELECT * FROM expense WHERE user_id = ? AND timestamp BETWEEN ? AND ?"
         params = (payload["id"], user_date["fromTimestamp"], user_date["toTimestamp"])
         expense_data = db.run_sql_select(sql_query, params=params)

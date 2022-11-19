@@ -1,4 +1,3 @@
-from re import sub
 import bcrypt
 import jwt
 from dotenv import load_dotenv
@@ -9,7 +8,6 @@ from datetime import datetime, timedelta, timezone
 load_dotenv()
 
 def hash_password(user_password):
-    print(user_password )
     encoded_pw = user_password.encode('utf-8')
     salt = bcrypt.gensalt()
     hash = bcrypt.hashpw(encoded_pw, salt)
@@ -19,7 +17,6 @@ def compare_hash(user_password, hash):
     encoded_pw = user_password.encode('utf-8')
     encoded_hash = hash.encode('utf-8')
     result = bcrypt.checkpw(encoded_pw, encoded_hash)
-    print(result)
     return result
 
 def generate_timestamp(value, is_day):
@@ -86,19 +83,14 @@ def confirm_token(token, expiration=900):
 
 from .mail import send_mail
 def send_confirmation_token(email):
-    print('hi')
     token = generate_confirmation_token(email)    
     
     confirm_url =f"{getenv('BASE_URL')}/confirm.html?token={token}"
     data = {
         "confirm_url": confirm_url
     }
-    confirm_html = f"<h1>Welcome!!</h1><h2>Confirmation Mail from Spency</h2><p>Thanks! for signing up. Please follow this link to activate your account:</p><p><a href={confirm_url}>{confirm_url}</a></p><br><h4>Happy Spending</h4>"
 
     to_email = email
-    subject = "Confirm E-Mail from Spency"
-    content_type = "text/html"
-    content = confirm_html
     templateID = "d-51f0da2f2e9d444b814adb52a463e960"
     res = send_mail(to_email, data, templateID)
 

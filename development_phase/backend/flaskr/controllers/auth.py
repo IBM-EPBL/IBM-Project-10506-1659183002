@@ -24,7 +24,6 @@ class EmailVerification(Resource):
     def get(post):
         email = request.args.get('email')
         user = db.run_sql_select("SELECT EMAIL, VERIFIED, NEXT_RESEND FROM USER WHERE EMAIL = ?", (email,))
-        print(user[0])
         if(user[0]["NEXT_RESEND"] > int(datetime.now().timestamp() * 1000)):
             return {"message": "Please wait", "next_resend": user[0]["NEXT_RESEND"]}, 400
 
@@ -61,7 +60,8 @@ class EmailVerification(Resource):
 
         @after_this_request
         def set_cookie(response):
-            response.set_cookie('auth_token', value=token, path="/", secure="True", samesite="None", httponly=True)
+            # response.set_cookie('auth_token', value=token, path="/", httponly=True)
+            response.headers.add('Set-Cookie',f'auth_token={token}; HttpOnly; Path=/')
             return response
         
         return {"message": "User Verified"}, 200
@@ -69,7 +69,6 @@ class EmailVerification(Resource):
 class Login(Resource):
     @token_required
     def get(payload, self):
-        print(payload)
         sql_query_user = "SELECT total_amount, alert, is_send, timestamp FROM user WHERE id=?"
         sql_query_split = "SELECT label, sum(amount) as amount FROM split_income WHERE user_id=? GROUP BY label ORDER BY LABEL"
         params = (payload["id"],)
@@ -98,11 +97,11 @@ class Login(Resource):
             "email": user["EMAIL"],
             "timestamp": user["TIMESTAMP"]
         }
-        print(jwt_data)
         token = general.create_jwt_token(jwt_data)
         @after_this_request
         def set_cookie(response):
-            response.set_cookie('auth_token', value=token, path="/", secure="None", samesite="None", httponly=True)
+            # response.set_cookie('auth_token', value=token, path="/", httponly=True)
+            response.headers.add('Set-Cookie',f'auth_token={token}; HttpOnly; Path=/')
             return response
         return {"message": "Successfully Logged In"}, 200
 
@@ -111,6 +110,7 @@ class Logout(Resource):
     def get(payload, self):
         @after_this_request
         def set_cookie(response):
-            response.set_cookie('auth_token', value="", path="/", secure="None", samesite="None", httponly=True)
+            # response.set_cookie('auth_token', value="", path="/", httponly=True)
+            response.headers.add('Set-Cookie',f'auth_token=""; HttpOnly; Path=/')
             return response
         return {"message": "Successfully Logged Out"}, 200
