@@ -7,8 +7,10 @@ const verify_email = async (token) => {
     const res = await fetch(endpoint.confirm_token, {
         method: "POST",
         credentials: "include",
-        headers: {
-            "Content-Type": "application/json"
+        mode:"cors",
+        headers:{
+            "Access-Control-Allow-Origin":"*",
+            "content-type":"application/json",
         },
         body: JSON.stringify({
             "token": token

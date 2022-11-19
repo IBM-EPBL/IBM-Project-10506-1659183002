@@ -29,8 +29,10 @@ export const send_usage_alert = async () => {
     const res = await fetch(endpoint.alert, {
         method:"POST",
         credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
+        mode:"cors",
+        headers:{
+            "Access-Control-Allow-Origin":"*",
+            "content-type":"application/json",
         },
         body: JSON.stringify(bodyData)
     });   

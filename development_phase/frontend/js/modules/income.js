@@ -33,8 +33,10 @@ const updateIncome = async (amount) => {
     const res = await fetch(endpoint.add_income, {
         method:"POST",
         credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
+        mode:"cors",
+        headers:{
+            "Access-Control-Allow-Origin":"*",
+            "content-type":"application/json",
         },
         body: JSON.stringify(data)
     });
@@ -119,8 +121,10 @@ const addSplitIncome = async (e) => {
     const res = await fetch(endpoint.split_income, {
         method:"POST",
         credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
+        mode:"cors",
+        headers:{
+            "Access-Control-Allow-Origin":"*",
+            "content-type":"application/json",
         },
         body: JSON.stringify(data)
     });

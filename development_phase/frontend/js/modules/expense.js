@@ -43,8 +43,10 @@ const addExpense = async (e) => {
     const res = await fetch(endpoint.add_expense, {
         method:"POST",
         credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
+        mode:"cors",
+        headers:{
+            "Access-Control-Allow-Origin":"*",
+            "content-type":"application/json",
         },
         body: JSON.stringify(data)
     });
@@ -129,8 +131,10 @@ const getFilterExpense = async (e) => {
     const res = await fetch(endpoint.expense_filter, {
         method:"POST",
         credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
+        mode:"cors",
+        headers:{
+            "Access-Control-Allow-Origin":"*",
+            "content-type":"application/json",
         },
         body: JSON.stringify(bodyData)
     });

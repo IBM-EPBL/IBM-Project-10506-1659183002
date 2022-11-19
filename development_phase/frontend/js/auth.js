@@ -28,8 +28,10 @@ loginForm.addEventListener("submit", async (e) => {
     const res = await fetch(endpoint.login, {
         method:"POST",
         credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
+        mode:"cors",
+        headers:{
+            "Access-Control-Allow-Origin":"*",
+            "content-type":"application/json",
         },
         body: JSON.stringify(req_data)
     });
@@ -110,8 +112,10 @@ signupForm.addEventListener("submit", async (e) => {
     }
     const res = await fetch(endpoint.register, {
         method:"POST",
-        headers: {
-            'Content-Type': 'application/json'
+        mode:"cors",
+        headers:{
+            "Access-Control-Allow-Origin":"*",
+            "content-type":"application/json",
         },
         body: JSON.stringify(req_data)
     });
