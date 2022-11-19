@@ -17,7 +17,5 @@ build/
 DigiCertGlobalRootCA.crt
 ssl
 
-Dockerfile
 .dockerignore
-kube_deployment.yaml
 frontend_deploy
