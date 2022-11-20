@@ -14,3 +14,8 @@ build/
 *.egg-info/
 
 .env
+DigiCertGlobalRootCA.crt
+ssl
+
+.dockerignore
+frontend_deploy

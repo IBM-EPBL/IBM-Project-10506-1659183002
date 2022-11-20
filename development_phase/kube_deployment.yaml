@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spency-api-deployment
+  labels:
+    app: spency-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spency-api
+  template:
+    metadata:
+      labels:
+        app: spency-api
+    spec:
+      containers:
+      - name: spency-api
+        image: bloodbrother/spency-api:stable-1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spency-frontend-deployment
+  labels:
+    app: spency-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spency-frontend
+  template:
+    metadata:
+      labels:
+        app: spency-frontend
+    spec:
+      containers:
+      - name: spency-frontend
+        image: bloodbrother/spency:stable-1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spency-api-service
+  labels:
+    app: spency-api-service
+spec:
+  ports:
+  -  port: 5000
+     protocol: TCP
+     targetPort: 5000
+  selector:
+    app: spency-api
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spency-frontend-service
+  labels:
+    app: spency-frontend-service
+spec:
+  ports:
+  -  port: 3000
+     protocol: TCP
+     targetPort: 3000
+  selector:
+    app: spency-frontend
+  type: NodePort
