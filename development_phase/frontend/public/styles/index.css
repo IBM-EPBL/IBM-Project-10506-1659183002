@@ -373,7 +373,21 @@ input{
     color: var(--secondary);
     border: 1px solid transparent;
     border-radius: 1rem;
-    width: 100%
+    width: 100%;
+    position: relative;
+}
+
+.expense-split-btn img, .filter-update-btn img{
+    width: 30px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    animation: loading_animation 1.5s ease infinite;
+}
+
+.filter-update-btn img{
+    top: 2px;
+    width: 20px;
 }
 
 .expense-split-btn:hover, .update-alert-btn:hover{
@@ -460,7 +474,7 @@ input{
     padding: 0.2rem;
     margin: 1rem;
     font-size: 1rem;
-    border: 1px solid transparent\;
+    border: 1px solid transparent;
 }
 
 .filter-update-btn:hover, .filter-reset-btn:hover{
@@ -562,4 +576,16 @@ input{
     to {
         transform: rotate(360deg);
     }
+}
+
+.popup{
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    background-color: var(--secondary-transparent);
+    color: var(--primary);
+    padding: 1rem;
+    font-size: 2rem;
 }

@@ -1,4 +1,5 @@
 import { endpoint } from "./endpoint.js";
+import { displayPopup } from "./popup.js";
 import { user } from "./user_data.js"
 
 const alertInp = document.querySelector("#alert-inp");
@@ -9,10 +10,7 @@ const updateAlertUI = () => {
 export const send_usage_alert = async () => {
     const pending_amount = user.getData('balance');
     const alert = user.getData('alert');
-    console.log(user.getData('is_send'));
-    console.log(alert, pending_amount);
     if((user.getData('is_send')) || alert < pending_amount){
-        console.log('in')
         return ;
     }
     const total_amount = user.getData('totalAmount');
@@ -46,6 +44,10 @@ const updateAlertBtn = document.querySelector(".update-alert-btn");
 const loadingAlertUI = document.querySelector(".updating-alert");
 const updateAlert = async (e) => {
     e.preventDefault();
+    if(user.getData("timestamp") === 0){
+        displayPopup("Please update your total Income");
+        return;
+    }
     if(is_update_progress){
         return ;
     }

@@ -30,15 +30,13 @@ loginForm.addEventListener("submit", async (e) => {
         credentials: 'include',
         mode:"cors",
         headers:{
-            "Access-Control-Allow-Origin":"*",
+            // "Access-Control-Allow-Origin":"*",
             "content-type":"application/json",
         },
         body: JSON.stringify(req_data)
     });
     const res_data = await res.json();
-    console.log(res)
     if(res.status === 401){
-        console.log('data', res_data)
         const cnt = document.querySelector(".auth-container")
         cnt.innerHTML = reSendTemplate;
 
@@ -59,14 +57,12 @@ const enable_next_resend = (next_resend_ts) => {
     const next_resend = (new Date(next_resend_ts)).getTime();
     const now = (new Date()).getTime();
     const diff = next_resend - now;
-    console.log(diff)
     if(diff <= 0)
     {
         return;
     }
     
     let seconds = Math.floor((diff/1000));
-    console.log(seconds)
     const btn = document.querySelector(".resend-btn");
     btn.disabled = true;
     const msg = document.querySelector(".msg");
@@ -85,7 +81,6 @@ const enable_next_resend = (next_resend_ts) => {
 }
 
 const resendMail = async (email) => {
-    console.log(isResendBtnEnabled);
     if(!isResendBtnEnabled)
         return
     isResendBtnEnabled = false;
@@ -93,7 +88,6 @@ const resendMail = async (email) => {
         method: "GET"
     });
     const res_data = await res.json();
-    console.log(res, res_data);
     enable_next_resend(res_data["next_resend"]);
 }
 
@@ -175,11 +169,9 @@ window.addEventListener("load", async () => {
     toggleLoader(1, signupSubmit, authLoader[1]);
 
     const res = await fetch(endpoint.login, {
-        method: "GET",
         credentials: "include"
     });
     const data = await res.json();
-    console.log(data, res);
     if(res.status == 200){
         window.location.href = "index.html"
     }

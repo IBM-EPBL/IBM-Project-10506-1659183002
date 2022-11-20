@@ -33,7 +33,6 @@ const logoutUser= async () => {
 }
 
 logoutBtn.addEventListener("click", logoutUser);
-
 const isUserLoggedIn = async () => {
     const res = await fetch(endpoint.login, {
         method: "GET",
@@ -52,7 +51,6 @@ const toggleUserLogged = (isLoggedIn, username, userData, incomeData, balance_da
         username = username.split('@');
         navUser.querySelector(".user-name").innerText = username[0];
         user.setInitial(username[0], userData, incomeData, balance_data, expense_data);
-        console.log(user.getData('username'));
     }
     else{
         navLogin.classList.remove("none");
@@ -68,7 +66,6 @@ const loading = document.querySelector(".loading");
 window.addEventListener("load", async () => {
     const res = await isUserLoggedIn();
     const data = await res.json();
-    console.log(data);
     if(res.status == 200){
         toggleUserLogged(true, data['email'], data['user_data'], data['split_data'], data['balance_data'], data['expense_data'])
         loadData();
@@ -80,6 +77,5 @@ window.addEventListener("load", async () => {
     else{
         nav.classList.remove("none");
         loading.classList.add("none");
-        console.log('hi')
     }
 });
