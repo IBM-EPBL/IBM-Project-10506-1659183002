@@ -1,17 +1,19 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3.8-slim-buster
+FROM python:3.10-slim-buster
 
 WORKDIR /app
 
-COPY . .
+COPY requirements.txt requirements.txt
 
-RUN apt-get update && apt-get install -y gcc libxml2 libxslt-dev
+RUN apt update
 
-RUN apt-get install -y vim
+RUN apt install build-essential -y
 
-RUN python -m pip install --upgrade pip
+RUN pip3 install --upgrade pip
 
 RUN pip3 install -r requirements.txt
+
+COPY . .
 
 CMD ["python3", "-m", "gunicorn", "-w", "4", "--thread", "2", "-b",  "0.0.0.0:5000", "wsgi:app"]
