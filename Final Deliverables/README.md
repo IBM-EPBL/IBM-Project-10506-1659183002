@@ -31,13 +31,39 @@
 2. Copy data from [.env.example](https://github.com/IBM-EPBL/IBM-Project-10506-1659183002/blob/website/development_phase/backend/.env.example) and paste it in ```.env```
 3. Create ```IBM DB2``` credential and Add it to ```Database Creadential ibm DB2``` section in .env.
 4. Create ```Random Key``` for ```Secret Key``` section.
-5. Create ```Sendgrid api key``` and Add it to ```SEND GRID``` section also Add ```FROM_MAIL```.
+5. Create ```Sendgrid api key``` and Add it to ```SEND GRID``` section.
 6. Add ```BASE_URL```
       
       For EG:  If the Link for confirm.html is
       http://localhost:5500/[Your_folder_path]/frontend/confirm.html
       Then Add
       http://localhost:5500/[Your_folder_path]/frontend
+
+# Set Up Database
+
+1. Create the Following table with this [SQL](https://github.com/IBM-EPBL/IBM-Project-10506-1659183002/blob/main/Final%20Deliverables/backend/sql/schema.sql)
+
+# Set up Sendgrid and template
+
+1. Verify the sender [here](https://app.sendgrid.com/settings/sender_auth/senders)
+2. Create two ```Dynamic Template``` [here](https://mc.sendgrid.com/dynamic-templates)
+   1. Confirmation E-Mail template with the following variable 
+
+      ```json
+      {
+       "confirm_url": "Confirm_url"
+      }
+      ```
+   2. Usage Alert template with the following variable
+      ```json
+      {
+        "total_amount": 5000,
+        "pending_amount": 100,
+        "percentage": 98,
+        "date": "10/10/2001",
+        "next_date":"10/10/2001" 
+      }
+      ```
 # Start Frontend
 > ### Note: Make sure you are in ```frontend``` folder
 1. Install the necessary packages by
