@@ -12,7 +12,6 @@ let prevValue = 0;
 const incomeInp = document.querySelector("#income");
 const editIncome = (e) => {
     e.preventDefault();
-    console.log(prevValue)
     if(isTrigger && +incomeInp.value !== prevValue){
         updateIncome(+incomeInp.value)
     }
@@ -24,7 +23,12 @@ const editIncome = (e) => {
     isTrigger = !isTrigger;
 }
 
+const isUpdateProgress = false;
 const updateIncome = async (amount) => {
+    if(isUpdateProgress){
+        return;
+    }
+    isUpdateProgress = true;
     const timestamp = Date.now();
     const data = {
         amount,
@@ -40,11 +44,14 @@ const updateIncome = async (amount) => {
         },
         body: JSON.stringify(data)
     });
-    const status = await res.json();
     if(res.status === 200){
         user.setData('balance', amount);
+        const date = new Date(timestamp);
+        const dateStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        document.querySelector(".from-date-disp span").innerText = dateStr;
         document.querySelector(".balance span").innerText = amount;
     }
+    isUpdateProgress = false;
 }
 
 export const updateBalance = () => {
@@ -59,10 +66,8 @@ export const updateSplitData = () => {
         if(idx == 0)  return;
         split_data_cnt.removeChild(ele);
     })
-    console.log(user.getData('splitData'))
     user.getData('splitData').forEach(data => {
         const split_value_div = split_data_template(data);
-        console.log(split_value_div);
         split_data_cnt.appendChild(split_value_div);
         split_value_div.querySelector(".split-edit").addEventListener("click", removeSplitData);
     });
@@ -77,7 +82,6 @@ const updateLabelValue = (e) => {
 const updateSplitPreview = (amount) => {
     const splitCnt = document.querySelector(".split-preview span");
     const isPercent = document.querySelector('input[name="split-type"]:checked').value;
-    console.log('hi')
     if(isPercent === "percent"){
         amount = amount > 100 ? 100 : amount;
         splitAmountInp.value = amount;
@@ -108,12 +112,14 @@ const changeSplitOnUpdate = (e) => {
 }
 
 let isSplitProgress = false;
+const splitExpenseLoading = document.querySelector(".split-income .expense-split-btn img");
 const addSplitIncome = async (e) => {
     e.preventDefault();
     if(splitAmount === 0 || isSplitProgress){
         return;
     }
     isSplitProgress = true;
+    splitExpenseLoading.classList.remove("none");
     const data = {
         amount: splitAmount,
         label
@@ -128,13 +134,14 @@ const addSplitIncome = async (e) => {
         },
         body: JSON.stringify(data)
     });
-    const msg = await res.json();
-    isSplitProgress = false;
     if(res.status === 200){
         user.updateSplitData(data);
         updateSplitData();
         splitAmountInp.value = ""
     }
+    isSplitProgress = false;
+    splitExpenseLoading.classList.remove("none");
+
 }
 
 export const fetchSplitIncome = async () => {
@@ -143,9 +150,7 @@ export const fetchSplitIncome = async () => {
         credentials: 'include',
     });
     const resData = await res.json();
-    console.log(resData)
     if(res.status === 200){
-        // user.setSplitData(resData["data"]);
         user.setSplitData(user.getData('splitData'), resData['balance_data']);
         updateSplitData();
     }

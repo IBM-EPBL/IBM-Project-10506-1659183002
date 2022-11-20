@@ -1,4 +1,5 @@
-const baseURL = "http://localhost:5000"
+// const baseURL = "http://169.51.194.117:32454";
+const baseURL = "http://localhost:5000";
 
 export const endpoint = {
     "register": `${baseURL}/api/auth/register`,

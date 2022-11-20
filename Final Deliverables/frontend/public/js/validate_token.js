@@ -16,8 +16,6 @@ const verify_email = async (token) => {
             "token": token
         })
     })
-    // const data = res.json();
-    // console.log(res.status)
     if(res.status == 200){
         msgCnt.innerHTML = successTemplate;
         return;

@@ -13,13 +13,11 @@ const calculateTotalExpense = () => {
         prev[curr['LABEL']] += curr['IS_INCOME'] ? -amount : amount;
         return prev;
     }, {})
-    console.log(totalSpend);
     Object.entries(totalSpend).forEach(value => {
         if(value[1] <= 0){
             delete totalSpend[value[0]];
         }
     })
-    console.log(totalSpend);
     return totalSpend;
 }
 

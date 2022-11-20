@@ -22,15 +22,20 @@ const updateIsIncome = (e) => {
         radioTypeBtn[1].classList.add("active");
         radioTypeBtn[0].classList.remove("active");
     }
-    console.log(is_income);
 }
 const updateLabelValue = (e) => {
     label =e.target.value;
-    console.log(label);
 }
 
+let isAddProgress = false;
+const addExpenseLoading = document.querySelector(".expense-add .expense-split-btn img");
 const addExpense = async (e) => {
     e.preventDefault();
+    if(isAddProgress){
+        return;
+    }
+    addExpenseLoading.classList.remove("none");
+    isAddProgress = true;
     const amountInp = document.querySelector("#amount-inp");
     const amount = +amountInp.value;
     const timestamp = Date.now();
@@ -54,7 +59,6 @@ const addExpense = async (e) => {
         amountInp.value = "";
         user.updateUserExpenseData(data);
         if(isFilterPresent === false){
-            console.log('in', filterData)
             updateExpenseData(user.getData('expenseData'));
         }
         updateBalance();
@@ -62,6 +66,8 @@ const addExpense = async (e) => {
         send_usage_alert();
         loadChart();
     }
+    addExpenseLoading.classList.add("none");
+    isAddProgress = false;
 }
 
 export const updateExpenseData = (expenseData) => {
@@ -117,12 +123,15 @@ const filterExpenseLabel = () => {
 }
 
 let isFilterProcessing = false;
+const filterExpenseLoading = document.querySelector(".filter-update-btn img");
+
 const getFilterExpense = async (e) => {
     e.preventDefault();
     if(isFilterProcessing || (currToTimestamp == 0 || currFromTimestamp == 0) || currFromTimestamp >= currToTimestamp || (currToTimestamp == prevToTimestamp && currFromTimestamp == prevFromTimestamp) ){
         filterExpenseLabel(user.getData('expenseData'));
         return;
     }
+    filterExpenseLoading.classList.remove("none");
     isFilterProcessing = true;
     const bodyData = {
         fromTimestamp: currFromTimestamp,
@@ -141,12 +150,12 @@ const getFilterExpense = async (e) => {
     if(res.status === 200){
         const resData = await res.json();
         filterData = resData["expense_data"]
-        console.log(filterData)
         filterExpenseLabel()
         prevFromTimestamp = currFromTimestamp;
         prevToTimestamp =currToTimestamp;
-        isFilterProcessing = false;
     }
+    filterExpenseLoading.classList.add("none");
+    isFilterProcessing = false;
 }
 
 const resetFilter = (e) => {
@@ -159,7 +168,6 @@ const resetFilter = (e) => {
 }
 
 export const loadExpenseFunction = () => {
-    console.log(radioTypeBtn)
     labelDropDown.addEventListener("change", updateLabelValue);
     radioTypeBtn.forEach(btn => {
         btn.addEventListener("click", updateIsIncome)
