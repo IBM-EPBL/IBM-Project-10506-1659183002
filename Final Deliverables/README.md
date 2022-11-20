@@ -1,4 +1,8 @@
-# Personal Expense Tracker
+# Personal Expense Tracker - SPENCY
+
+## Spency is Live @ 
+ * Main site [http://169.51.194.117:31320/](http://169.51.194.117:31320/)
+ * Backend [http://169.51.194.117:32454/](http://169.51.194.117:32454/)
 
 # Setting up environment
 
@@ -35,10 +39,17 @@
       Then Add
       http://localhost:5500/[Your_folder_path]/frontend
 # Start Frontend
-1. Start it by liveserver using vscode.
-> ### Note: Make sure the link is ```localhost``` and not ```127.0.0.1```. If it's in ```127.0.0.1``` convert it to ```localhost```
+> ### Note: Make sure you are in ```frontend``` folder
+1. Install the necessary packages by
+```shell
+npm install
+```
+2. Start the srever
+ ```shell
+ npm start
+ ```
 # Start Backend
 > ### Note: Make sure you are in ```backend``` folder
 ```shell
-flask --app flaskr --debug run
+gunicorn -w 4 -b 0.0.0.0:5000 wsgi:app
 ```
