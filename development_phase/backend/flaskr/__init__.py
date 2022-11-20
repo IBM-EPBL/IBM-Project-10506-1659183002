@@ -1,4 +1,3 @@
-from distutils.log import Log
 from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api, reqparse
@@ -8,7 +7,7 @@ parser = reqparse.RequestParser()
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     api = Api(app)
-    CORS(app)
+    CORS(app, supports_credentials=True)
     
     # Endpoint: Authentication
     from .controllers.auth import Register, Login, Logout, EmailVerification
@@ -35,12 +34,12 @@ def create_app(test_config=None):
     def index():
         return 'Please visit frontend Spency'
 
-    @app.after_request
-    def after_request(res):
-    #     res.headers['Access-Control-Allow-Origin'] = 'http://169.51.194.117:31320'
+    # @app.after_request
+    # def after_request(res):
+    #     res.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
     #     res.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     #     res.headers['Access-Control-Expose-Headers'] = 'true'
-        res.headers['Access-Control-Allow-Credentials'] = 'true'
-        return res
+    #     res.headers['Access-Control-Allow-Credentials'] = 'true'
+    #     return res
         
     return app
