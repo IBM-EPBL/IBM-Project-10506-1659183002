@@ -1,4 +1,8 @@
-# Personal Expense Tracker Application
+# Personal Expense Tracker - SPENCY
+
+## Spency is Live @ 
+ * Main site [http://169.51.194.117:31320/](http://169.51.194.117:31320/)
+ * Backend [http://169.51.194.117:32454/](http://169.51.194.117:32454/)
 
 ## Category: 
 Cloud App Development
