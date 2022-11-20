@@ -25,13 +25,11 @@ CREATE TABLE expense (
 );
 
 # SPLIT INCOME TABLE
-CREATE TABLE expense (
+CREATE TABLE split_income (
 	id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
 	user_id INT NOT NULL,
 	amount DECIMAL NOT NULL,
-	is_income BOOLEAN NOT NULL,
 	label VARCHAR(50) NOT NULL DEFAULT 'OTHER',
-	timestamp BIGINT NOT NULL ,
 	constraint fk_user_id  
             foreign key (user_id)  
             references user(id) 
