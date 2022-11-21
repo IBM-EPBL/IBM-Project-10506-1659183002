@@ -46,6 +46,7 @@ const updateIncome = async (amount) => {
     });
     if(res.status === 200){
         user.setData('balance', amount);
+        user.setData('timestamp', timestamp);
         const date = new Date(timestamp);
         const dateStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
         document.querySelector(".from-date-disp span").innerText = dateStr;
@@ -140,7 +141,7 @@ const addSplitIncome = async (e) => {
         splitAmountInp.value = ""
     }
     isSplitProgress = false;
-    splitExpenseLoading.classList.remove("none");
+    splitExpenseLoading.classList.add("none");
 
 }
 
