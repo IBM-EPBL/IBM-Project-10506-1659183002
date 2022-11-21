@@ -1,16 +1,12 @@
 # syntax=docker/dockerfile:1
 
-# FROM python:3.8-slim-buster
+FROM node:16
 
-# FROM node:16
+WORKDIR /usr/src/app
 
-FROM bloodbrother/spency:stable-1.0.0
+COPY package*.json ./
 
-# WORKDIR /usr/src/app
-
-# COPY package*.json ./
-
-# RUN npm ci --only=production
+RUN npm ci --only=production
 
 COPY . .
 
