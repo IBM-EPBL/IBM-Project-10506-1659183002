@@ -23,7 +23,7 @@ const editIncome = (e) => {
     isTrigger = !isTrigger;
 }
 
-const isUpdateProgress = false;
+let isUpdateProgress = false;
 const updateIncome = async (amount) => {
     if(isUpdateProgress){
         return;
