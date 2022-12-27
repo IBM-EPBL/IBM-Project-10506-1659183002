@@ -1,7 +1,7 @@
 # Personal Expense Tracker - SPENCY
 
 ## Spency is Live @ 
- * Main site [http://169.51.194.117:31320/](http://169.51.194.117:31320/)
+ * Main site [http://169.51.206.174:31737/](http://169.51.206.174:31737/)
  * [Demo Video](https://youtu.be/RcO0kYkbAzY)
 
 ## Category: 
